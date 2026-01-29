@@ -85,7 +85,7 @@
   },
   "procurement": {
     "title": "Procurement List",
-    "subtitle": "Your shopping list based on target bag count",
+    "subtitle": "Your shopping list based on your budget",
     "buy": "Buy",
     "sacks": "Sacks",
     "extra": "extra",
@@ -93,7 +93,9 @@
     "totalItems": "Total Items",
     "grandTotal": "Grand Total",
     "generateList": "Generate List",
-    "noBagSelected": "Please configure a bag in the Calculator first"
+    "noBagSelected": "Please configure a bag in the Calculator first",
+    "setBudget": "Please set your total budget in the Calculator.",
+    "addItems": "Please add items to your bag in the Calculator."
   },
   "dashboard": {
     "title": "Dashboard",

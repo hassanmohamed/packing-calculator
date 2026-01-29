@@ -7,12 +7,16 @@ import type { ProcurementItem } from '@/types/database'
 
 export function ProcurementPage() {
   const { t, i18n } = useTranslation()
-  const { currentBag, targetCount } = useBagStore()
+  const { currentBag, totalBudget, getMaxBags, getCostPerBag } = useBagStore()
+
+  // Calculate bags based on budget (not target count)
+  const bagCount = getMaxBags()
+  const costPerBag = getCostPerBag()
 
   // Calculate procurement for each item
   const procurementItems: ProcurementItem[] = currentBag.map((bagItem) => {
     const { totalNeeded, bulksToBuy, looseUnits, estimatedCost } = calculateProcurement(
-      targetCount,
+      bagCount,
       bagItem.quantity,
       bagItem.item.units_per_bulk,
       bagItem.item.bulk_price,
@@ -31,7 +35,7 @@ export function ProcurementPage() {
 
   const grandTotal = procurementItems.reduce((sum, pi) => sum + pi.estimatedCost, 0)
 
-  if (currentBag.length === 0 || targetCount === 0) {
+  if (currentBag.length === 0 || bagCount === 0) {
     return (
       <div className="space-y-6">
         <div>
@@ -44,9 +48,9 @@ export function ProcurementPage() {
             <AlertCircle className="h-12 w-12 text-amber-500 mb-4" />
             <p className="text-lg font-medium">{t('procurement.noBagSelected')}</p>
             <p className="text-muted-foreground mt-1">
-              {targetCount === 0
-                ? 'Please set a target bag count in the Calculator.'
-                : 'Please add items to your bag in the Calculator.'}
+              {totalBudget === 0
+                ? t('procurement.setBudget')
+                : t('procurement.addItems')}
             </p>
           </CardContent>
         </Card>
@@ -63,11 +67,18 @@ export function ProcurementPage() {
       </div>
 
       {/* Summary Cards */}
-      <div className="grid gap-3 grid-cols-1 sm:grid-cols-3">
+      <div className="grid gap-3 grid-cols-1 sm:grid-cols-4">
         <Card>
           <CardContent className="p-4">
-            <p className="text-sm font-medium text-muted-foreground">{t('calculator.targetBags')}</p>
-            <p className="text-2xl font-bold">{targetCount}</p>
+            <p className="text-sm font-medium text-muted-foreground">{t('calculator.totalBudget')}</p>
+            <p className="text-2xl font-bold">{formatCurrency(totalBudget, i18n.language)}</p>
+          </CardContent>
+        </Card>
+        <Card>
+          <CardContent className="p-4">
+            <p className="text-sm font-medium text-muted-foreground">{t('calculator.maxBags')}</p>
+            <p className="text-2xl font-bold">{bagCount}</p>
+            <p className="text-xs text-muted-foreground">{formatCurrency(costPerBag, i18n.language)}/{t('calculator.perBag')}</p>
           </CardContent>
         </Card>
         <Card>
@@ -95,7 +106,7 @@ export function ProcurementPage() {
                     {i18n.language === 'ar' ? pi.item.name_ar : pi.item.name_en}
                   </CardTitle>
                   <CardDescription>
-                    {pi.quantityPerBag} × {targetCount} {t('calculator.targetBags').toLowerCase()}
+                    {pi.quantityPerBag} × {bagCount} {t('calculator.maxBags').toLowerCase()}
                   </CardDescription>
                 </div>
                 <div className="rounded-full bg-muted p-2">
