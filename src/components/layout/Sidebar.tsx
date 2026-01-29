@@ -6,13 +6,20 @@ import {
   Calculator, 
   ShoppingCart,
   LogOut,
-  Languages
+  Languages,
+  Menu,
+  X
 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuth } from '@/hooks/useAuth'
 import { cn } from '@/lib/utils'
 
-export function Sidebar() {
+interface SidebarProps {
+  isOpen: boolean
+  onClose: () => void
+}
+
+export function Sidebar({ isOpen, onClose }: SidebarProps) {
   const { t, i18n } = useTranslation()
   const { signOut } = useAuth()
 
@@ -29,64 +36,117 @@ export function Sidebar() {
   ]
 
   return (
-    <aside className="fixed start-0 top-0 z-40 h-screen w-64 border-e bg-card transition-transform">
-      <div className="flex h-full flex-col justify-between overflow-y-auto px-3 py-4">
-        {/* Logo */}
-        <div>
-          <div className="mb-8 flex items-center gap-3 px-2">
-            <img 
-              src="/logo-full.png" 
-              alt="Ramadan Bag" 
-              className="h-12 w-auto object-contain"
-            />
-            <div>
+    <>
+      {/* Mobile overlay */}
+      {isOpen && (
+        <div 
+          className="fixed inset-0 z-40 bg-black/50 lg:hidden"
+          onClick={onClose}
+        />
+      )}
+
+      {/* Sidebar */}
+      <aside 
+        className={cn(
+          "fixed start-0 top-0 z-50 h-screen w-64 border-e bg-card transition-transform duration-300",
+          // Mobile: slide in/out
+          isOpen ? "translate-x-0" : "-translate-x-full rtl:translate-x-full",
+          // Desktop: always visible
+          "lg:translate-x-0 rtl:lg:-translate-x-0"
+        )}
+      >
+        <div className="flex h-full flex-col justify-between overflow-y-auto px-3 py-4">
+          {/* Header with close button on mobile */}
+          <div>
+            <div className="mb-6 flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <img 
+                  src="/logo-full.png" 
+                  alt="Ramadan Bag" 
+                  className="h-10 w-auto object-contain"
+                />
+              </div>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="lg:hidden"
+                onClick={onClose}
+              >
+                <X className="h-5 w-5" />
+              </Button>
+            </div>
+
+            {/* App name */}
+            <div className="mb-6 px-2">
               <h1 className="text-lg font-bold text-foreground">{t('app.name')}</h1>
               <p className="text-xs text-muted-foreground">{t('app.description')}</p>
             </div>
+
+            {/* Navigation */}
+            <nav className="space-y-1">
+              {navItems.map((item) => (
+                <NavLink
+                  key={item.to}
+                  to={item.to}
+                  onClick={onClose}
+                  className={({ isActive }) =>
+                    cn(
+                      'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all',
+                      isActive
+                        ? 'bg-primary text-primary-foreground'
+                        : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                    )
+                  }
+                >
+                  <item.icon className="h-5 w-5" />
+                  {item.label}
+                </NavLink>
+              ))}
+            </nav>
           </div>
 
-          {/* Navigation */}
-          <nav className="space-y-1">
-            {navItems.map((item) => (
-              <NavLink
-                key={item.to}
-                to={item.to}
-                className={({ isActive }) =>
-                  cn(
-                    'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all',
-                    isActive
-                      ? 'bg-primary text-primary-foreground'
-                      : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                  )
-                }
-              >
-                <item.icon className="h-5 w-5" />
-                {item.label}
-              </NavLink>
-            ))}
-          </nav>
+          {/* Bottom actions */}
+          <div className="space-y-2 border-t pt-4">
+            <Button
+              variant="ghost"
+              className="w-full justify-start gap-3"
+              onClick={toggleLanguage}
+            >
+              <Languages className="h-5 w-5" />
+              {i18n.language === 'ar' ? t('language.en') : t('language.ar')}
+            </Button>
+            <Button
+              variant="ghost"
+              className="w-full justify-start gap-3 text-destructive hover:bg-destructive/10 hover:text-destructive"
+              onClick={signOut}
+            >
+              <LogOut className="h-5 w-5" />
+              {t('auth.logout')}
+            </Button>
+          </div>
         </div>
+      </aside>
+    </>
+  )
+}
 
-        {/* Bottom actions */}
-        <div className="space-y-2 border-t pt-4">
-          <Button
-            variant="ghost"
-            className="w-full justify-start gap-3"
-            onClick={toggleLanguage}
-          >
-            <Languages className="h-5 w-5" />
-            {i18n.language === 'ar' ? t('language.en') : t('language.ar')}
-          </Button>
-          <Button
-            variant="ghost"
-            className="w-full justify-start gap-3 text-destructive hover:bg-destructive/10 hover:text-destructive"
-            onClick={signOut}
-          >
-            <LogOut className="h-5 w-5" />
-            {t('auth.logout')}
-          </Button>
-        </div>
+// Mobile header component
+export function MobileHeader({ onMenuClick }: { onMenuClick: () => void }) {
+  const { t } = useTranslation()
+  
+  return (
+    <header className="fixed top-0 start-0 end-0 z-30 flex items-center justify-between border-b bg-card px-4 py-3 lg:hidden">
+      <div className="flex items-center gap-2">
+        <img 
+          src="/logo-full.png" 
+          alt="Ramadan Bag" 
+          className="h-8 w-auto object-contain"
+        />
+        <span className="font-semibold text-foreground">{t('app.name')}</span>
       </div>
-    </aside>
+      <Button variant="ghost" size="icon" onClick={onMenuClick}>
+        <Menu className="h-5 w-5" />
+      </Button>
+    </header>
   )
 }

@@ -192,29 +192,29 @@ export function CalculatorPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">{t('calculator.title')}</h1>
-          <p className="text-muted-foreground">{t('calculator.subtitle')}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">{t('calculator.title')}</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">{t('calculator.subtitle')}</p>
         </div>
-        <div className="flex gap-2">
-          <Button variant="outline" onClick={() => setLoadDialogOpen(true)} disabled={savedBags.length === 0}>
-            <FolderOpen className="h-4 w-4 me-2" />
-            {t('calculator.loadBag')}
+        <div className="flex flex-wrap gap-2">
+          <Button variant="outline" size="sm" onClick={() => setLoadDialogOpen(true)} disabled={savedBags.length === 0}>
+            <FolderOpen className="h-4 w-4 sm:me-2" />
+            <span className="hidden sm:inline">{t('calculator.loadBag')}</span>
           </Button>
-          <Button variant="outline" onClick={clearBag}>
-            <Trash2 className="h-4 w-4 me-2" />
-            {t('common.delete')}
+          <Button variant="outline" size="sm" onClick={clearBag}>
+            <Trash2 className="h-4 w-4 sm:me-2" />
+            <span className="hidden sm:inline">{t('common.delete')}</span>
           </Button>
-          <Button onClick={() => setSaveDialogOpen(true)} disabled={currentBag.length === 0}>
-            <Save className="h-4 w-4 me-2" />
-            {t('calculator.saveBag')}
+          <Button size="sm" onClick={() => setSaveDialogOpen(true)} disabled={currentBag.length === 0}>
+            <Save className="h-4 w-4 sm:me-2" />
+            <span className="hidden sm:inline">{t('calculator.saveBag')}</span>
           </Button>
         </div>
       </div>
 
       {/* Metrics Bar */}
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
         <Card className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white">
           <CardContent className="p-4">
             <p className="text-sm font-medium text-emerald-100">{t('calculator.costPerBag')}</p>
@@ -341,21 +341,21 @@ export function CalculatorPage() {
                 {currentBag.map((bagItem) => (
                   <div
                     key={bagItem.item.id}
-                    className="flex items-center justify-between rounded-lg border p-3"
+                    className="flex flex-col gap-2 rounded-lg border p-3 sm:flex-row sm:items-center sm:justify-between"
                   >
-                    <div className="flex-1">
-                      <p className="font-medium">
+                    <div className="flex-1 min-w-0">
+                      <p className="font-medium truncate">
                         {i18n.language === 'ar' ? bagItem.item.name_ar : bagItem.item.name_en}
                       </p>
                       <p className="text-sm text-emerald-600 font-medium">
                         {formatCurrency(bagItem.quantity * bagItem.item.unit_price, i18n.language)}
                       </p>
                     </div>
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center justify-between gap-1 sm:gap-2">
                       <Button
                         size="icon"
                         variant="outline"
-                        className="h-8 w-8"
+                        className="h-8 w-8 shrink-0"
                         onClick={() => updateQuantity(bagItem.item.id, bagItem.quantity - 0.5)}
                       >
                         <Minus className="h-3 w-3" />
@@ -368,12 +368,12 @@ export function CalculatorPage() {
                         onChange={(e) =>
                           updateQuantity(bagItem.item.id, parseFloat(e.target.value) || 0)
                         }
-                        className="w-20 text-center"
+                        className="w-16 sm:w-20 text-center"
                       />
                       <Button
                         size="icon"
                         variant="outline"
-                        className="h-8 w-8"
+                        className="h-8 w-8 shrink-0"
                         onClick={() => updateQuantity(bagItem.item.id, bagItem.quantity + 0.5)}
                       >
                         <Plus className="h-3 w-3" />
@@ -381,7 +381,7 @@ export function CalculatorPage() {
                       <Button
                         size="icon"
                         variant="ghost"
-                        className="h-8 w-8 text-destructive"
+                        className="h-8 w-8 shrink-0 text-destructive"
                         onClick={() => removeItem(bagItem.item.id)}
                       >
                         <Trash2 className="h-4 w-4" />

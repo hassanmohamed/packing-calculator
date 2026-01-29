@@ -188,12 +188,12 @@ export function PantryPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight">{t('pantry.title')}</h1>
-          <p className="text-muted-foreground">{t('pantry.subtitle')}</p>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">{t('pantry.title')}</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">{t('pantry.subtitle')}</p>
         </div>
-        <Button onClick={() => handleOpenDialog()} className="gap-2">
+        <Button onClick={() => handleOpenDialog()} className="gap-2 w-full sm:w-auto">
           <Plus className="h-4 w-4" />
           {t('pantry.addItem')}
         </Button>
@@ -205,7 +205,7 @@ export function PantryPage() {
           placeholder={t('common.search')}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="max-w-sm"
+          className="w-full sm:max-w-sm"
         />
       </div>
 
@@ -222,6 +222,7 @@ export function PantryPage() {
               <p className="text-muted-foreground">{t('common.noData')}</p>
             </div>
           ) : (
+            <div className="overflow-x-auto">
             <Table>
               <TableHeader>
                 <TableRow>
@@ -281,6 +282,7 @@ export function PantryPage() {
                 ))}
               </TableBody>
             </Table>
+            </div>
           )}
         </CardContent>
       </Card>

@@ -57,15 +57,13 @@ export function ProcurementPage() {
   return (
     <div className="space-y-6">
       {/* Header */}
-      <div className="flex items-center justify-between">
-        <div>
-          <h1 className="text-3xl font-bold tracking-tight">{t('procurement.title')}</h1>
-          <p className="text-muted-foreground">{t('procurement.subtitle')}</p>
-        </div>
+      <div>
+        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">{t('procurement.title')}</h1>
+        <p className="text-muted-foreground text-sm sm:text-base">{t('procurement.subtitle')}</p>
       </div>
 
       {/* Summary Cards */}
-      <div className="grid gap-4 md:grid-cols-3">
+      <div className="grid gap-3 grid-cols-1 sm:grid-cols-3">
         <Card>
           <CardContent className="p-4">
             <p className="text-sm font-medium text-muted-foreground">{t('calculator.targetBags')}</p>
