@@ -1,0 +1,115 @@
+{
+  "app": {
+    "name": "رمضان باك",
+    "description": "مخطط أكياس رمضان الخيرية"
+  },
+  "nav": {
+    "dashboard": "الرئيسية",
+    "pantry": "المخزن",
+    "calculator": "حاسبة الأكياس",
+    "procurement": "قائمة المشتريات"
+  },
+  "auth": {
+    "login": "تسجيل الدخول",
+    "signup": "إنشاء حساب",
+    "logout": "تسجيل الخروج",
+    "email": "البريد الإلكتروني",
+    "password": "كلمة المرور",
+    "confirmPassword": "تأكيد كلمة المرور",
+    "forgotPassword": "نسيت كلمة المرور؟",
+    "noAccount": "ليس لديك حساب؟",
+    "hasAccount": "لديك حساب بالفعل؟",
+    "loginError": "البريد الإلكتروني أو كلمة المرور غير صحيحة",
+    "signupError": "تعذر إنشاء الحساب"
+  },
+  "common": {
+    "save": "حفظ",
+    "cancel": "إلغاء",
+    "delete": "حذف",
+    "edit": "تعديل",
+    "add": "إضافة",
+    "search": "بحث",
+    "loading": "جاري التحميل...",
+    "noData": "لا توجد بيانات",
+    "confirm": "تأكيد",
+    "actions": "الإجراءات",
+    "name": "الاسم",
+    "price": "السعر",
+    "quantity": "الكمية",
+    "total": "الإجمالي",
+    "category": "الفئة",
+    "unit": "وحدة",
+    "units": "وحدات",
+    "unitsEach": "وحدة لكل"
+  },
+  "pantry": {
+    "title": "إدارة المخزن",
+    "subtitle": "إدارة المواد والأسعار",
+    "addItem": "إضافة مادة",
+    "editItem": "تعديل المادة",
+    "deleteConfirm": "هل أنت متأكد من حذف هذه المادة؟",
+    "nameAr": "الاسم (عربي)",
+    "nameEn": "الاسم (إنجليزي)",
+    "bulkPrice": "سعر الجملة",
+    "unitsPerBulk": "الوحدات في الجملة",
+    "unitPrice": "سعر الوحدة",
+    "bulkConfig": "إعداد الجملة",
+    "categories": {
+      "dryGoods": "مواد جافة",
+      "liquids": "سوائل",
+      "canned": "معلبات",
+      "grains": "حبوب",
+      "spices": "بهارات",
+      "meat": "لحوم",
+      "packaging": "تعبئة وتغليف",
+      "other": "أخرى"
+    }
+  },
+  "calculator": {
+    "title": "حاسبة الأكياس",
+    "subtitle": "صمم كيس الخير",
+    "itemPalette": "المواد المتاحة",
+    "bagContents": "محتويات الكيس",
+    "costPerBag": "تكلفة الكيس الواحد",
+    "maxBags": "أقصى عدد ممكن",
+    "totalCost": "التكلفة الإجمالية",
+    "totalBudget": "الميزانية الإجمالية",
+    "targetBags": "عدد الأكياس المستهدف",
+    "emptyBag": "لا توجد مواد في الكيس. أضف من القائمة الجانبية.",
+    "saveBag": "حفظ النموذج",
+    "loadBag": "تحميل نموذج",
+    "bagName": "اسم الكيس",
+    "perBag": "لكل كيس",
+    "selectTemplate": "اختر نموذج كيس محفوظ",
+    "savedBags": "الأكياس المحفوظة"
+  },
+  "procurement": {
+    "title": "قائمة المشتريات",
+    "subtitle": "قائمة التسوق بناءً على عدد الأكياس المستهدف",
+    "buy": "شراء",
+    "sacks": "كيس",
+    "extra": "إضافي",
+    "estimatedCost": "التكلفة التقديرية",
+    "totalItems": "إجمالي المواد",
+    "grandTotal": "المجموع الكلي",
+    "generateList": "إنشاء القائمة",
+    "noBagSelected": "يرجى إعداد الكيس في الحاسبة أولاً"
+  },
+  "dashboard": {
+    "title": "الرئيسية",
+    "welcome": "مرحباً بك في رمضان باك",
+    "subtitle": "خطط لفعاليات توزيع أكياس رمضان الخيرية بسهولة",
+    "stats": {
+      "totalItems": "إجمالي المواد",
+      "savedBags": "الأكياس المحفوظة",
+      "avgCostPerBag": "متوسط تكلفة الكيس"
+    },
+    "quickActions": "إجراءات سريعة",
+    "recentBags": "آخر نماذج الأكياس"
+  },
+  "language": {
+    "en": "English",
+    "ar": "العربية",
+    "toggle": "تغيير اللغة"
+  }
+}

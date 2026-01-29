@@ -1,0 +1,115 @@
+{
+  "app": {
+    "name": "RamadanPack",
+    "description": "Ramadan Charity Bag Planner"
+  },
+  "nav": {
+    "dashboard": "Dashboard",
+    "pantry": "Pantry",
+    "calculator": "Bag Calculator",
+    "procurement": "Procurement List"
+  },
+  "auth": {
+    "login": "Login",
+    "signup": "Sign Up",
+    "logout": "Logout",
+    "email": "Email",
+    "password": "Password",
+    "confirmPassword": "Confirm Password",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't have an account?",
+    "hasAccount": "Already have an account?",
+    "loginError": "Invalid email or password",
+    "signupError": "Could not create account"
+  },
+  "common": {
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "add": "Add",
+    "search": "Search",
+    "loading": "Loading...",
+    "noData": "No data available",
+    "confirm": "Confirm",
+    "actions": "Actions",
+    "name": "Name",
+    "price": "Price",
+    "quantity": "Quantity",
+    "total": "Total",
+    "category": "Category",
+    "unit": "unit",
+    "units": "units",
+    "unitsEach": "units each"
+  },
+  "pantry": {
+    "title": "Pantry Management",
+    "subtitle": "Manage your inventory items and prices",
+    "addItem": "Add Item",
+    "editItem": "Edit Item",
+    "deleteConfirm": "Are you sure you want to delete this item?",
+    "nameAr": "Name (Arabic)",
+    "nameEn": "Name (English)",
+    "bulkPrice": "Bulk Price",
+    "unitsPerBulk": "Units per Bulk",
+    "unitPrice": "Unit Price",
+    "bulkConfig": "Bulk Configuration",
+    "categories": {
+      "dryGoods": "Dry Goods",
+      "liquids": "Liquids",
+      "canned": "Canned Goods",
+      "grains": "Grains",
+      "spices": "Spices",
+      "meat": "Meat",
+      "packaging": "Packaging",
+      "other": "Other"
+    }
+  },
+  "calculator": {
+    "title": "Bag Calculator",
+    "subtitle": "Design your charity bag",
+    "itemPalette": "Available Items",
+    "bagContents": "Bag Contents",
+    "costPerBag": "Cost per Bag",
+    "maxBags": "Max Bags Possible",
+    "totalCost": "Total Cost Required",
+    "totalBudget": "Total Budget",
+    "targetBags": "Target Bag Count",
+    "emptyBag": "No items in bag yet. Add items from the left panel.",
+    "saveBag": "Save Bag Template",
+    "loadBag": "Load Bag",
+    "bagName": "Bag Name",
+    "perBag": "per bag",
+    "selectTemplate": "Select a saved bag template",
+    "savedBags": "Saved Bags"
+  },
+  "procurement": {
+    "title": "Procurement List",
+    "subtitle": "Your shopping list based on target bag count",
+    "buy": "Buy",
+    "sacks": "Sacks",
+    "extra": "extra",
+    "estimatedCost": "Estimated Cost",
+    "totalItems": "Total Items",
+    "grandTotal": "Grand Total",
+    "generateList": "Generate List",
+    "noBagSelected": "Please configure a bag in the Calculator first"
+  },
+  "dashboard": {
+    "title": "Dashboard",
+    "welcome": "Welcome to RamadanPack",
+    "subtitle": "Plan your Ramadan charity packing events with ease",
+    "stats": {
+      "totalItems": "Total Items",
+      "savedBags": "Saved Bags",
+      "avgCostPerBag": "Avg Cost per Bag"
+    },
+    "quickActions": "Quick Actions",
+    "recentBags": "Recent Bag Templates"
+  },
+  "language": {
+    "en": "English",
+    "ar": "العربية",
+    "toggle": "Toggle Language"
+  }
+}
