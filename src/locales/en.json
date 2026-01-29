@@ -93,9 +93,11 @@
     "totalItems": "Total Items",
     "grandTotal": "Grand Total",
     "generateList": "Generate List",
-    "noBagSelected": "Please configure a bag in the Calculator first",
-    "setBudget": "Please set your total budget in the Calculator.",
-    "addItems": "Please add items to your bag in the Calculator."
+    "noBagSelected": "Please configure a bag first",
+    "setBudget": "Please set your total budget.",
+    "addItems": "Please add items to your bag.",
+    "selectBag": "Select Bag Template",
+    "currentBag": "Current Bag"
   },
   "dashboard": {
     "title": "Dashboard",
