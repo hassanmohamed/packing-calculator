@@ -72,9 +72,9 @@ export function DashboardPage() {
   ]
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 page-transition">
       {/* Header */}
-      <div>
+      <div className="animate-slide-up">
         <h1 className="text-3xl font-bold tracking-tight">{t('dashboard.welcome')}</h1>
         <p className="text-muted-foreground">{t('dashboard.subtitle')}</p>
       </div>
@@ -82,7 +82,10 @@ export function DashboardPage() {
       {/* Stats Grid */}
       <div className="grid gap-4 md:grid-cols-3">
         {statCards.map((stat, index) => (
-          <Card key={index} className="overflow-hidden">
+          <Card 
+            key={index} 
+            className={`overflow-hidden card-hover animate-slide-up stagger-${index + 1}`}
+          >
             <CardContent className="p-6">
               <div className="flex items-center justify-between">
                 <div>
@@ -91,7 +94,7 @@ export function DashboardPage() {
                     {loading ? '...' : stat.value}
                   </p>
                 </div>
-                <div className={`rounded-full bg-gradient-to-br ${stat.gradient} p-3`}>
+                <div className={`rounded-full bg-gradient-to-br ${stat.gradient} p-3 transition-transform hover:scale-110`}>
                   <stat.icon className="h-6 w-6 text-white" />
                 </div>
               </div>
@@ -101,7 +104,7 @@ export function DashboardPage() {
       </div>
 
       {/* Quick Actions */}
-      <Card>
+      <Card className="animate-slide-up stagger-4">
         <CardHeader>
           <CardTitle>{t('dashboard.quickActions')}</CardTitle>
         </CardHeader>

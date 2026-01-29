@@ -190,9 +190,9 @@ export function CalculatorPage() {
   const totalCostRequired = getTotalCostRequired()
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 page-transition">
       {/* Header */}
-      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between animate-slide-up">
         <div>
           <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">{t('calculator.title')}</h1>
           <p className="text-muted-foreground text-sm sm:text-base">{t('calculator.subtitle')}</p>
@@ -215,7 +215,7 @@ export function CalculatorPage() {
 
       {/* Metrics Bar */}
       <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
-        <Card className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white">
+        <Card className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white card-hover animate-slide-up stagger-1">
           <CardContent className="p-4">
             <p className="text-sm font-medium text-emerald-100">{t('calculator.costPerBag')}</p>
             <p className="text-2xl font-bold">{formatCurrency(costPerBag, i18n.language)}</p>

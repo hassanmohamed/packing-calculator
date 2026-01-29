@@ -59,35 +59,35 @@ export function ProcurementPage() {
   }
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 page-transition">
       {/* Header */}
-      <div>
+      <div className="animate-slide-up">
         <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">{t('procurement.title')}</h1>
         <p className="text-muted-foreground text-sm sm:text-base">{t('procurement.subtitle')}</p>
       </div>
 
       {/* Summary Cards */}
       <div className="grid gap-3 grid-cols-1 sm:grid-cols-4">
-        <Card>
+        <Card className="card-hover animate-slide-up stagger-1">
           <CardContent className="p-4">
             <p className="text-sm font-medium text-muted-foreground">{t('calculator.totalBudget')}</p>
             <p className="text-2xl font-bold">{formatCurrency(totalBudget, i18n.language)}</p>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="card-hover animate-slide-up stagger-2">
           <CardContent className="p-4">
             <p className="text-sm font-medium text-muted-foreground">{t('calculator.maxBags')}</p>
             <p className="text-2xl font-bold">{bagCount}</p>
             <p className="text-xs text-muted-foreground">{formatCurrency(costPerBag, i18n.language)}/{t('calculator.perBag')}</p>
           </CardContent>
         </Card>
-        <Card>
+        <Card className="card-hover animate-slide-up stagger-3">
           <CardContent className="p-4">
             <p className="text-sm font-medium text-muted-foreground">{t('procurement.totalItems')}</p>
             <p className="text-2xl font-bold">{procurementItems.length}</p>
           </CardContent>
         </Card>
-        <Card className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white">
+        <Card className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white card-hover animate-slide-up stagger-4">
           <CardContent className="p-4">
             <p className="text-sm font-medium text-emerald-100">{t('procurement.grandTotal')}</p>
             <p className="text-2xl font-bold">{formatCurrency(grandTotal, i18n.language)}</p>
@@ -97,8 +97,8 @@ export function ProcurementPage() {
 
       {/* Procurement Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-        {procurementItems.map((pi) => (
-          <Card key={pi.item.id} className="overflow-hidden">
+        {procurementItems.map((pi, index) => (
+          <Card key={pi.item.id} className={`overflow-hidden card-hover animate-slide-up stagger-${Math.min(index + 5, 8)}`}>
             <CardHeader className="pb-2">
               <div className="flex items-start justify-between">
                 <div>
