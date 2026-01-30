@@ -53,6 +53,7 @@
     "bulkPrice": "Bulk Price",
     "unitsPerBulk": "Units per Bulk",
     "unitPrice": "Unit Price",
+    "weightKg": "Weight (kg)",
     "bulkConfig": "Bulk Configuration",
     "categories": {
       "dryGoods": "Dry Goods",
@@ -97,7 +98,10 @@
     "setBudget": "Please set your total budget.",
     "addItems": "Please add items to your bag.",
     "selectBag": "Select Bag Template",
-    "currentBag": "Current Bag"
+    "currentBag": "Current Bag",
+    "totalWeight": "Total Weight",
+    "trucksNeeded": "Pickup Trucks Needed",
+    "perTruck": "per truck (1000 kg)"
   },
   "dashboard": {
     "title": "Dashboard",

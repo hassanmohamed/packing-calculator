@@ -1,6 +1,6 @@
 import { useEffect, useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ShoppingCart, Package, AlertCircle } from 'lucide-react'
+import { ShoppingCart, Package, AlertCircle, Truck } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -122,10 +122,14 @@ export function ProcurementPage() {
       bagItem.item.unit_price
     )
 
+    // Calculate total weight for this item
+    const totalWeight = totalNeeded * (bagItem.item.weight_kg || 0)
+
     return {
       item: bagItem.item,
       quantityPerBag: bagItem.quantity,
       totalNeeded,
+      totalWeight,
       bulksToBuy,
       looseUnits,
       estimatedCost,
@@ -133,6 +137,8 @@ export function ProcurementPage() {
   })
 
   const grandTotal = procurementItems.reduce((sum, pi) => sum + pi.estimatedCost, 0)
+  const totalWeight = procurementItems.reduce((sum, pi) => sum + pi.totalWeight, 0)
+  const trucksNeeded = Math.ceil(totalWeight / 1000) // 1000 kg per pickup truck
 
   return (
     <div className="space-y-6 page-transition">
@@ -210,7 +216,7 @@ export function ProcurementPage() {
       {!loadingBag && activeBag.length > 0 && bagCount > 0 && (
         <>
           {/* Summary Cards */}
-          <div className="grid gap-3 grid-cols-2 sm:grid-cols-4">
+          <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-6">
             <Card className="card-hover animate-slide-up stagger-2">
               <CardContent className="p-4">
                 <p className="text-sm font-medium text-muted-foreground">{t('calculator.totalBudget')}</p>
@@ -230,7 +236,23 @@ export function ProcurementPage() {
                 <p className="text-xl sm:text-2xl font-bold">{procurementItems.length}</p>
               </CardContent>
             </Card>
-            <Card className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white card-hover animate-slide-up stagger-5">
+            <Card className="card-hover animate-slide-up stagger-5">
+              <CardContent className="p-4">
+                <p className="text-sm font-medium text-muted-foreground">{t('procurement.totalWeight')}</p>
+                <p className="text-xl sm:text-2xl font-bold">{formatNumber(totalWeight, i18n.language)} kg</p>
+              </CardContent>
+            </Card>
+            <Card className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white card-hover animate-slide-up stagger-6">
+              <CardContent className="p-4">
+                <div className="flex items-center gap-2">
+                  <Truck className="h-4 w-4" />
+                  <p className="text-sm font-medium text-blue-100">{t('procurement.trucksNeeded')}</p>
+                </div>
+                <p className="text-xl sm:text-2xl font-bold">{trucksNeeded}</p>
+                <p className="text-xs text-blue-100">{t('procurement.perTruck')}</p>
+              </CardContent>
+            </Card>
+            <Card className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white card-hover animate-slide-up stagger-7">
               <CardContent className="p-4">
                 <p className="text-sm font-medium text-emerald-100">{t('procurement.grandTotal')}</p>
                 <p className="text-xl sm:text-2xl font-bold">{formatCurrency(grandTotal, i18n.language)}</p>

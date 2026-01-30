@@ -5,6 +5,7 @@ export interface Item {
   unit_price: number
   bulk_price: number
   units_per_bulk: number
+  weight_kg: number
   category: string | null
   created_at?: string
   user_id?: string
@@ -36,6 +37,7 @@ export interface ProcurementItem {
   item: Item
   quantityPerBag: number
   totalNeeded: number
+  totalWeight: number
   bulksToBuy: number
   looseUnits: number
   estimatedCost: number
@@ -53,6 +55,7 @@ export interface Database {
           unit_price: number
           bulk_price: number
           units_per_bulk: number
+          weight_kg?: number
           category?: string | null
           user_id?: string
         }
@@ -62,6 +65,7 @@ export interface Database {
           unit_price?: number
           bulk_price?: number
           units_per_bulk?: number
+          weight_kg?: number
           category?: string | null
         }
       }

@@ -61,6 +61,7 @@ export function PantryPage() {
     name_en: '',
     bulk_price: '',
     units_per_bulk: '',
+    weight_kg: '',
     category: 'other' as string,
   })
 
@@ -94,6 +95,7 @@ export function PantryPage() {
         name_en: item.name_en,
         bulk_price: item.bulk_price.toString(),
         units_per_bulk: item.units_per_bulk.toString(),
+        weight_kg: (item.weight_kg || 0).toString(),
         category: item.category || 'other',
       })
     } else {
@@ -103,6 +105,7 @@ export function PantryPage() {
         name_en: '',
         bulk_price: '',
         units_per_bulk: '',
+        weight_kg: '',
         category: 'other',
       })
     }
@@ -127,6 +130,7 @@ export function PantryPage() {
             bulk_price: bulkPrice,
             units_per_bulk: unitsPerBulk,
             unit_price: unitPrice,
+            weight_kg: parseFloat(formData.weight_kg) || 0,
             category: formData.category,
           })
           .eq('id', editingItem.id)
@@ -139,6 +143,7 @@ export function PantryPage() {
           bulk_price: bulkPrice,
           units_per_bulk: unitsPerBulk,
           unit_price: unitPrice,
+          weight_kg: parseFloat(formData.weight_kg) || 0,
           category: formData.category,
           user_id: user.id,
         })
@@ -348,10 +353,24 @@ export function PantryPage() {
                   />
                 </div>
               </div>
-              <div className="space-y-2">
-                <Label>{t('pantry.unitPrice')} ({t('common.total')})</Label>
-                <div className="rounded-md border bg-muted px-3 py-2 text-emerald-600 font-medium">
-                  {formatCurrency(calculatedUnitPrice, i18n.language)}
+              <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="weight_kg">{t('pantry.weightKg')}</Label>
+                  <Input
+                    id="weight_kg"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={formData.weight_kg}
+                    onChange={(e) => setFormData({ ...formData, weight_kg: e.target.value })}
+                    placeholder="0.0"
+                  />
+                </div>
+                <div className="space-y-2">
+                  <Label>{t('pantry.unitPrice')} ({t('common.total')})</Label>
+                  <div className="rounded-md border bg-muted px-3 py-2 text-emerald-600 font-medium">
+                    {formatCurrency(calculatedUnitPrice, i18n.language)}
+                  </div>
                 </div>
               </div>
               <div className="space-y-2">

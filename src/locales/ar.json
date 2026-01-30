@@ -53,6 +53,7 @@
     "bulkPrice": "سعر الجملة",
     "unitsPerBulk": "الوحدات في الجملة",
     "unitPrice": "سعر الوحدة",
+    "weightKg": "الوزن (كجم)",
     "bulkConfig": "إعداد الجملة",
     "categories": {
       "dryGoods": "مواد جافة",
@@ -97,7 +98,10 @@
     "setBudget": "يرجى تحديد الميزانية الكلية.",
     "addItems": "يرجى إضافة مواد للكيس.",
     "selectBag": "اختر قالب الكيس",
-    "currentBag": "الكيس الحالي"
+    "currentBag": "الكيس الحالي",
+    "totalWeight": "الوزن الإجمالي",
+    "trucksNeeded": "عدد النصف نقل المطلوبة",
+    "perTruck": "لكل نقل (1000 كجم)"
   },
   "dashboard": {
     "title": "الرئيسية",
