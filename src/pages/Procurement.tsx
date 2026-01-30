@@ -260,6 +260,67 @@ export function ProcurementPage() {
             </Card>
           </div>
 
+          {/* Compact Summary Table */}
+          <Card className="animate-slide-up stagger-8">
+            <CardHeader className="pb-2">
+              <CardTitle className="text-lg">{t('procurement.summaryTable')}</CardTitle>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead>
+                    <tr className="border-b bg-muted/50">
+                      <th className="text-start p-3 font-medium">{t('common.name')}</th>
+                      <th className="text-end p-3 font-medium">{t('common.units')}</th>
+                      <th className="text-end p-3 font-medium">{t('pantry.weightKg')}</th>
+                      <th className="text-end p-3 font-medium">{t('procurement.sacks')}</th>
+                      <th className="text-end p-3 font-medium">{t('procurement.extra')}</th>
+                      <th className="text-end p-3 font-medium">{t('procurement.estimatedCost')}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {procurementItems.map((pi, index) => (
+                      <tr key={pi.item.id} className={index % 2 === 0 ? 'bg-background' : 'bg-muted/30'}>
+                        <td className="p-3 font-medium">
+                          {i18n.language === 'ar' ? pi.item.name_ar : pi.item.name_en}
+                        </td>
+                        <td className="text-end p-3">{formatNumber(pi.totalNeeded, i18n.language)}</td>
+                        <td className="text-end p-3">{formatNumber(pi.totalWeight, i18n.language)}</td>
+                        <td className="text-end p-3">
+                          <span className="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900 px-2 py-0.5 text-blue-700 dark:text-blue-300">
+                            {formatNumber(pi.bulksToBuy, i18n.language)}
+                          </span>
+                        </td>
+                        <td className="text-end p-3">
+                          {pi.looseUnits > 0 ? (
+                            <span className="inline-flex items-center rounded-full bg-amber-100 dark:bg-amber-900 px-2 py-0.5 text-amber-700 dark:text-amber-300">
+                              +{formatNumber(pi.looseUnits, i18n.language)}
+                            </span>
+                          ) : (
+                            <span className="text-muted-foreground">-</span>
+                          )}
+                        </td>
+                        <td className="text-end p-3 font-semibold text-emerald-600">
+                          {formatCurrency(pi.estimatedCost, i18n.language)}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                  <tfoot>
+                    <tr className="border-t bg-muted font-semibold">
+                      <td className="p-3">{t('common.total')}</td>
+                      <td className="text-end p-3">{formatNumber(procurementItems.reduce((s, pi) => s + pi.totalNeeded, 0), i18n.language)}</td>
+                      <td className="text-end p-3">{formatNumber(totalWeight, i18n.language)} kg</td>
+                      <td className="text-end p-3">{formatNumber(procurementItems.reduce((s, pi) => s + pi.bulksToBuy, 0), i18n.language)}</td>
+                      <td className="text-end p-3">{formatNumber(procurementItems.reduce((s, pi) => s + pi.looseUnits, 0), i18n.language)}</td>
+                      <td className="text-end p-3 text-emerald-600">{formatCurrency(grandTotal, i18n.language)}</td>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+            </CardContent>
+          </Card>
+
           {/* Procurement Cards */}
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
             {procurementItems.map((pi, index) => (

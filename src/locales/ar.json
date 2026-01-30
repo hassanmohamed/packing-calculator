@@ -101,7 +101,8 @@
     "currentBag": "الكيس الحالي",
     "totalWeight": "الوزن الإجمالي",
     "trucksNeeded": "عدد النصف نقل المطلوبة",
-    "perTruck": "لكل نقل (1000 كجم)"
+    "perTruck": "لكل نقل (1000 كجم)",
+    "summaryTable": "ملخص سريع"
   },
   "dashboard": {
     "title": "الرئيسية",

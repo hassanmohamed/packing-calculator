@@ -101,7 +101,8 @@
     "currentBag": "Current Bag",
     "totalWeight": "Total Weight",
     "trucksNeeded": "Pickup Trucks Needed",
-    "perTruck": "per truck (1000 kg)"
+    "perTruck": "per truck (1000 kg)",
+    "summaryTable": "Quick Summary"
   },
   "dashboard": {
     "title": "Dashboard",
