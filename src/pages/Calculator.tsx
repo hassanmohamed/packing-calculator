@@ -13,13 +13,6 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/components/ui/select'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/hooks/useAuth'
 import { useBagStore } from '@/hooks/useBagStore'
@@ -52,6 +45,8 @@ export function CalculatorPage() {
   const [loading, setLoading] = useState(true)
   const [saveDialogOpen, setSaveDialogOpen] = useState(false)
   const [loadDialogOpen, setLoadDialogOpen] = useState(false)
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false)
+  const [deletingBag, setDeletingBag] = useState<BagTemplate | null>(null)
   const [saving, setSaving] = useState(false)
   const [loadingBag, setLoadingBag] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
@@ -172,6 +167,27 @@ export function CalculatorPage() {
       console.error('Error loading bag:', error)
     } finally {
       setLoadingBag(false)
+    }
+  }
+
+  const handleDeleteBag = async () => {
+    if (!deletingBag) return
+
+    try {
+      // Delete bag (cascade will delete bag_items)
+      const { error } = await supabase
+        .from('bag_templates')
+        .delete()
+        .eq('id', deletingBag.id)
+
+      if (error) throw error
+
+      // Refresh saved bags list
+      setSavedBags(savedBags.filter(b => b.id !== deletingBag.id))
+      setDeleteDialogOpen(false)
+      setDeletingBag(null)
+    } catch (error) {
+      console.error('Error deleting bag:', error)
     }
   }
 
@@ -434,23 +450,66 @@ export function CalculatorPage() {
           <div className="space-y-4 py-4">
             <div className="space-y-2">
               <Label>{t('calculator.savedBags')}</Label>
-              <Select onValueChange={handleLoadBag} disabled={loadingBag}>
-                <SelectTrigger>
-                  <SelectValue placeholder={t('calculator.selectTemplate')} />
-                </SelectTrigger>
-                <SelectContent>
-                  {savedBags.map((bag) => (
-                    <SelectItem key={bag.id} value={bag.id}>
-                      {bag.name} ({bag.target_count} bags)
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
+              <div className="max-h-64 overflow-y-auto space-y-2 rounded-md border p-2">
+                {savedBags.length === 0 ? (
+                  <p className="text-center text-muted-foreground py-4">{t('calculator.noBagsSaved')}</p>
+                ) : (
+                  savedBags.map((bag) => (
+                    <div key={bag.id} className="flex items-center justify-between p-2 rounded-md hover:bg-muted">
+                      <div className="flex-1 min-w-0">
+                        <p className="font-medium truncate">{bag.name}</p>
+                        <p className="text-xs text-muted-foreground">
+                          {bag.target_count} {t('calculator.maxBags').toLowerCase()}
+                        </p>
+                      </div>
+                      <div className="flex items-center gap-2 ms-2">
+                        <Button
+                          size="sm"
+                          onClick={() => handleLoadBag(bag.id)}
+                          disabled={loadingBag}
+                        >
+                          {t('calculator.loadBag')}
+                        </Button>
+                        <Button
+                          size="sm"
+                          variant="destructive"
+                          onClick={() => {
+                            setDeletingBag(bag)
+                            setDeleteDialogOpen(true)
+                          }}
+                        >
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  ))
+                )}
+              </div>
             </div>
           </div>
           <DialogFooter>
             <Button variant="outline" onClick={() => setLoadDialogOpen(false)}>
               {t('common.cancel')}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
+
+      {/* Delete Confirmation Dialog */}
+      <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
+        <DialogContent>
+          <DialogHeader>
+            <DialogTitle>{t('calculator.deleteBag')}</DialogTitle>
+            <DialogDescription>
+              {t('calculator.deleteBagConfirm', { name: deletingBag?.name })}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter>
+            <Button variant="outline" onClick={() => setDeleteDialogOpen(false)}>
+              {t('common.cancel')}
+            </Button>
+            <Button variant="destructive" onClick={handleDeleteBag}>
+              {t('common.delete')}
             </Button>
           </DialogFooter>
         </DialogContent>

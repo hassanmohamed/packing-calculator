@@ -82,7 +82,10 @@
     "bagName": "Bag Name",
     "perBag": "per bag",
     "selectTemplate": "Select a saved bag template",
-    "savedBags": "Saved Bags"
+    "savedBags": "Saved Bags",
+    "noBagsSaved": "No saved bags yet",
+    "deleteBag": "Delete Bag Template",
+    "deleteBagConfirm": "Are you sure you want to delete \"{{name}}\"? This action cannot be undone."
   },
   "procurement": {
     "title": "Procurement List",

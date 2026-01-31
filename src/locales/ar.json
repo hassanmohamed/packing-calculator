@@ -82,7 +82,10 @@
     "bagName": "اسم الكيس",
     "perBag": "لكل كيس",
     "selectTemplate": "اختر نموذج كيس محفوظ",
-    "savedBags": "الأكياس المحفوظة"
+    "savedBags": "الأكياس المحفوظة",
+    "noBagsSaved": "لا توجد أكياس محفوظة بعد",
+    "deleteBag": "حذف النموذج",
+    "deleteBagConfirm": "هل أنت متأكد من حذف \"{{name}}\"? هذا الإجراء لا يمكن التراجع عنه."
   },
   "procurement": {
     "title": "قائمة المشتريات",
