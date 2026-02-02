@@ -443,7 +443,7 @@ export function CalculatorPage() {
                 id="bagName"
                 value={bagName}
                 onChange={(e) => setBagName(e.target.value)}
-                placeholder="Ramadan 2024 Standard Bag"
+                placeholder="Standard Charity Bag"
               />
             </div>
           </div>

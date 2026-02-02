@@ -1,7 +1,7 @@
 {
   "app": {
-    "name": "RamadanPack",
-    "description": "Ramadan Charity Bag Planner"
+    "name": "Charity Bag",
+    "description": "Charity Bag Planner"
   },
   "nav": {
     "dashboard": "Dashboard",
@@ -110,8 +110,8 @@
   },
   "dashboard": {
     "title": "Dashboard",
-    "welcome": "Welcome to RamadanPack",
-    "subtitle": "Plan your Ramadan charity packing events with ease",
+    "welcome": "Welcome to Charity Bag",
+    "subtitle": "Plan your charity packing events with ease",
     "stats": {
       "totalItems": "Total Items",
       "savedBags": "Saved Bags",

@@ -78,7 +78,7 @@ export function LoginPage() {
           <div className="mx-auto mb-4 flex h-24 w-24 items-center justify-center">
             <img 
               src="/logo-full.png" 
-              alt="Ramadan Bag" 
+              alt="Charity Bag" 
               className="h-24 w-auto object-contain"
             />
           </div>

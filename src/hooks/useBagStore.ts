@@ -124,7 +124,7 @@ export const useBagStore = create<BagStore>()(
       }
     }),
     {
-      name: 'ramadan-bag-store',
+      name: 'charity-bag-store',
       partialize: (state) => ({
         currentBag: state.currentBag,
         bagName: state.bagName,

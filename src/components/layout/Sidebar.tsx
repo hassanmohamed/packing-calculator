@@ -62,7 +62,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               <NavLink to="/" onClick={onClose} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                 <img 
                   src="/logo-full.png" 
-                  alt="Ramadan Bag" 
+                  alt="Charity Bag" 
                   className="h-10 w-auto object-contain"
                 />
               </NavLink>
@@ -139,7 +139,7 @@ export function MobileHeader({ onMenuClick }: { onMenuClick: () => void }) {
       <div className="flex items-center gap-2">
         <img 
           src="/logo-full.png" 
-          alt="Ramadan Bag" 
+          alt="Charity Bag" 
           className="h-8 w-auto object-contain"
         />
         <span className="font-semibold text-foreground">{t('app.name')}</span>

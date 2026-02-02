@@ -1,7 +1,7 @@
 {
   "app": {
     "name": "شنطة الخير",
-    "description": "مخطط شنط رمضان الخيرية"
+    "description": "مخطط شنط الخير"
   },
   "nav": {
     "dashboard": "الرئيسية",
@@ -110,15 +110,15 @@
   },
   "dashboard": {
     "title": "الرئيسية",
-    "welcome": "مرحباً بك في رمضان باك",
-    "subtitle": "خطط لفعاليات توزيع أكياس رمضان الخيرية بسهولة",
+    "welcome": "مرحباً بك في شنطة الخير",
+    "subtitle": "خطط لفعاليات توزيع شنط الخير بسهولة",
     "stats": {
       "totalItems": "إجمالي المواد",
-      "savedBags": "الأكياس المحفوظة",
-      "avgCostPerBag": "متوسط تكلفة الكيس"
+      "savedBags": "الشنط المحفوظة",
+      "avgCostPerBag": "متوسط تكلفة الشنطة"
     },
     "quickActions": "إجراءات سريعة",
-    "recentBags": "آخر نماذج الأكياس"
+    "recentBags": "آخر نماذج الشنط"
   },
   "language": {
     "en": "English",
