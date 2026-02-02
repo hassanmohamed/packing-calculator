@@ -61,6 +61,7 @@ export function PantryPage() {
     name_en: '',
     bulk_price: '',
     units_per_bulk: '',
+    unit_price: '',
     weight_kg: '',
     category: 'other' as string,
   })
@@ -95,6 +96,7 @@ export function PantryPage() {
         name_en: item.name_en,
         bulk_price: item.bulk_price.toString(),
         units_per_bulk: item.units_per_bulk.toString(),
+        unit_price: item.unit_price.toString(),
         weight_kg: (item.weight_kg || 0).toString(),
         category: item.category || 'other',
       })
@@ -105,6 +107,7 @@ export function PantryPage() {
         name_en: '',
         bulk_price: '',
         units_per_bulk: '',
+        unit_price: '',
         weight_kg: '',
         category: 'other',
       })
@@ -118,7 +121,10 @@ export function PantryPage() {
 
     const bulkPrice = parseFloat(formData.bulk_price) || 0
     const unitsPerBulk = parseFloat(formData.units_per_bulk) || 1
-    const unitPrice = calculateUnitPrice(bulkPrice, unitsPerBulk)
+    // Use user-entered unit price if available, otherwise calculate from bulk price
+    const unitPrice = formData.unit_price 
+      ? parseFloat(formData.unit_price) 
+      : calculateUnitPrice(bulkPrice, unitsPerBulk)
 
     try {
       if (editingItem) {
@@ -185,10 +191,39 @@ export function PantryPage() {
     )
   })
 
-  const calculatedUnitPrice = calculateUnitPrice(
-    parseFloat(formData.bulk_price) || 0,
-    parseFloat(formData.units_per_bulk) || 1
-  )
+  // Bi-directional price calculation handlers
+  const handleBulkPriceChange = (value: string) => {
+    const bulkPrice = parseFloat(value) || 0
+    const unitsPerBulk = parseFloat(formData.units_per_bulk) || 1
+    const unitPrice = unitsPerBulk > 0 ? bulkPrice / unitsPerBulk : 0
+    setFormData({ 
+      ...formData, 
+      bulk_price: value, 
+      unit_price: unitPrice > 0 ? unitPrice.toFixed(2) : '' 
+    })
+  }
+
+  const handleUnitsPerBulkChange = (value: string) => {
+    const unitsPerBulk = parseFloat(value) || 1
+    const bulkPrice = parseFloat(formData.bulk_price) || 0
+    const unitPrice = unitsPerBulk > 0 ? bulkPrice / unitsPerBulk : 0
+    setFormData({ 
+      ...formData, 
+      units_per_bulk: value, 
+      unit_price: unitPrice > 0 ? unitPrice.toFixed(2) : '' 
+    })
+  }
+
+  const handleUnitPriceChange = (value: string) => {
+    const unitPrice = parseFloat(value) || 0
+    const unitsPerBulk = parseFloat(formData.units_per_bulk) || 1
+    const bulkPrice = unitPrice * unitsPerBulk
+    setFormData({ 
+      ...formData, 
+      unit_price: value, 
+      bulk_price: bulkPrice > 0 ? bulkPrice.toFixed(2) : '' 
+    })
+  }
 
   return (
     <div className="space-y-6">
@@ -336,7 +371,7 @@ export function PantryPage() {
                     min="0"
                     step="0.01"
                     value={formData.bulk_price}
-                    onChange={(e) => setFormData({ ...formData, bulk_price: e.target.value })}
+                    onChange={(e) => handleBulkPriceChange(e.target.value)}
                     required
                   />
                 </div>
@@ -348,12 +383,26 @@ export function PantryPage() {
                     min="1"
                     step="0.01"
                     value={formData.units_per_bulk}
-                    onChange={(e) => setFormData({ ...formData, units_per_bulk: e.target.value })}
+                    onChange={(e) => handleUnitsPerBulkChange(e.target.value)}
                     required
                   />
                 </div>
               </div>
               <div className="grid grid-cols-2 gap-4">
+                <div className="space-y-2">
+                  <Label htmlFor="unit_price">{t('pantry.unitPrice')}</Label>
+                  <Input
+                    id="unit_price"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={formData.unit_price}
+                    onChange={(e) => handleUnitPriceChange(e.target.value)}
+                    className="border-emerald-200 focus:border-emerald-500"
+                    placeholder={t('pantry.unitPriceHint')}
+                  />
+                  <p className="text-xs text-muted-foreground">{t('pantry.unitPriceHint')}</p>
+                </div>
                 <div className="space-y-2">
                   <Label htmlFor="weight_kg">{t('pantry.weightKg')}</Label>
                   <Input
@@ -365,12 +414,6 @@ export function PantryPage() {
                     onChange={(e) => setFormData({ ...formData, weight_kg: e.target.value })}
                     placeholder="0.0"
                   />
-                </div>
-                <div className="space-y-2">
-                  <Label>{t('pantry.unitPrice')} ({t('common.total')})</Label>
-                  <div className="rounded-md border bg-muted px-3 py-2 text-emerald-600 font-medium">
-                    {formatCurrency(calculatedUnitPrice)}
-                  </div>
                 </div>
               </div>
               <div className="space-y-2">

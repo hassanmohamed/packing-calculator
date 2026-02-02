@@ -156,20 +156,39 @@ export function ProcurementPage() {
             <div className="space-y-2">
               <Label>{t('procurement.selectBag')}</Label>
               <Select value={selectedBagId} onValueChange={setSelectedBagId} disabled={loading}>
-                <SelectTrigger>
+                <SelectTrigger className={selectedBagId === 'current' ? 'border-primary' : ''}>
                   <SelectValue placeholder={t('procurement.selectBag')} />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="current">
-                    {t('procurement.currentBag')} ({currentBag.length} {t('procurement.totalItems').toLowerCase()})
+                  {/* Current Bag - highlighted */}
+                  <SelectItem value="current" className="font-semibold">
+                    <div className="flex items-center gap-2">
+                      <span className="inline-block w-2 h-2 rounded-full bg-emerald-500"></span>
+                      {t('procurement.currentBag')} ({currentBag.length} {t('procurement.totalItems').toLowerCase()})
+                    </div>
                   </SelectItem>
-                  {savedBags.map((bag) => (
-                    <SelectItem key={bag.id} value={bag.id}>
-                      {bag.name}
-                    </SelectItem>
-                  ))}
+                  
+                  {/* Saved Bags Section */}
+                  {savedBags.length > 0 && (
+                    <>
+                      <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground border-t mt-1 pt-2">
+                        {t('procurement.savedBagsHistory')}
+                      </div>
+                      {savedBags.map((bag) => (
+                        <SelectItem key={bag.id} value={bag.id}>
+                          <div className="flex items-center gap-2">
+                            <span className="inline-block w-2 h-2 rounded-full bg-blue-400"></span>
+                            {bag.name}
+                          </div>
+                        </SelectItem>
+                      ))}
+                    </>
+                  )}
                 </SelectContent>
               </Select>
+              {selectedBagId === 'current' && (
+                <p className="text-xs text-emerald-600">{t('calculator.bagContents')}</p>
+              )}
             </div>
 
             {/* Budget Input (for saved bags) */}

@@ -54,6 +54,7 @@
     "bulkPrice": "سعر الجملة",
     "unitsPerBulk": "الوحدات في الجملة",
     "unitPrice": "سعر الوحدة",
+    "unitPriceHint": "أو أدخل سعر الوحدة لحساب الجملة",
     "weightKg": "الوزن (كجم)",
     "bulkConfig": "إعداد الجملة",
     "categories": {
@@ -102,7 +103,8 @@
     "setBudget": "يرجى تحديد الميزانية الكلية.",
     "addItems": "يرجى إضافة مواد للشنطة.",
     "selectBag": "اختر الشنطة",
-    "currentBag": "الشنطة الحالية",
+    "currentBag": "الشنطة الحالية (قيد الإعداد)",
+    "savedBagsHistory": "الشنط المحفوظة",
     "totalWeight": "الوزن الإجمالي",
     "trucksNeeded": "عدد النصف نقل المطلوبة",
     "perTruck": "لكل نقل (1000 كجم)",

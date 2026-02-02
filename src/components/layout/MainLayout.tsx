@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { Outlet } from 'react-router-dom'
 import { Sidebar, MobileHeader } from './Sidebar'
+import { BottomNav } from './BottomNav'
 
 export function MainLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
@@ -15,11 +16,14 @@ export function MainLayout() {
       
       {/* Main content */}
       <main className="lg:ps-64">
-        {/* Add top padding on mobile for the fixed header */}
-        <div className="container mx-auto p-4 pt-20 lg:p-6 lg:pt-6">
+        {/* Add padding: top for mobile header, bottom for mobile bottom nav */}
+        <div className="container mx-auto p-4 pt-20 pb-24 lg:p-6 lg:pt-6 lg:pb-6">
           <Outlet />
         </div>
       </main>
+
+      {/* Bottom navigation for mobile */}
+      <BottomNav />
     </div>
   )
 }
