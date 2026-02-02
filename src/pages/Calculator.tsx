@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import { Plus, Minus, Save, Trash2, Package, ShoppingBag, FolderOpen } from 'lucide-react'
+import { useNavigate } from 'react-router-dom'
+import { Plus, Minus, Save, Trash2, Package, ShoppingBag, FolderOpen, ShoppingCart, ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
@@ -22,6 +23,7 @@ import type { Item, BagTemplate } from '@/types/database'
 export function CalculatorPage() {
   const { t, i18n } = useTranslation()
   const { user } = useAuth()
+  const navigate = useNavigate()
   const {
     currentBag,
     bagName,
@@ -229,16 +231,10 @@ export function CalculatorPage() {
         </div>
       </div>
 
-      {/* Metrics Bar */}
-      <div className="grid gap-3 grid-cols-2 lg:grid-cols-4">
-        <Card className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white card-hover animate-slide-up stagger-1">
-          <CardContent className="p-4">
-            <p className="text-sm font-medium text-emerald-100">{t('calculator.costPerBag')}</p>
-            <p className="text-2xl font-bold">{formatCurrency(costPerBag, i18n.language)}</p>
-          </CardContent>
-        </Card>
-
-        <Card>
+      {/* Metrics Bar - Budget/Target first (user feedback #6) */}
+      <div className="grid gap-3 grid-cols-2 lg:grid-cols-5">
+        {/* Budget Input - First */}
+        <Card className="animate-slide-up stagger-1">
           <CardContent className="p-4">
             <Label htmlFor="totalBudget" className="text-sm text-muted-foreground">
               {t('calculator.totalBudget')}
@@ -254,14 +250,8 @@ export function CalculatorPage() {
           </CardContent>
         </Card>
 
-        <Card className="bg-blue-50 dark:bg-blue-950">
-          <CardContent className="p-4">
-            <p className="text-sm font-medium text-muted-foreground">{t('calculator.maxBags')}</p>
-            <p className="text-2xl font-bold text-blue-600">{maxBags}</p>
-          </CardContent>
-        </Card>
-
-        <Card>
+        {/* Target Bag Count - Second */}
+        <Card className="animate-slide-up stagger-2">
           <CardContent className="p-4">
             <Label htmlFor="targetCount" className="text-sm text-muted-foreground">
               {t('calculator.targetBags')}
@@ -277,6 +267,34 @@ export function CalculatorPage() {
             <p className="mt-1 text-xs text-muted-foreground">
               {t('calculator.totalCost')}: {formatCurrency(totalCostRequired, i18n.language)}
             </p>
+          </CardContent>
+        </Card>
+
+        {/* Cost Per Bag */}
+        <Card className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white card-hover animate-slide-up stagger-3">
+          <CardContent className="p-4">
+            <p className="text-sm font-medium text-emerald-100">{t('calculator.costPerBag')}</p>
+            <p className="text-2xl font-bold">{formatCurrency(costPerBag, i18n.language)}</p>
+          </CardContent>
+        </Card>
+
+        {/* Max Bags */}
+        <Card className="bg-blue-50 dark:bg-blue-950 animate-slide-up stagger-4">
+          <CardContent className="p-4">
+            <p className="text-sm font-medium text-muted-foreground">{t('calculator.maxBags')}</p>
+            <p className="text-2xl font-bold text-blue-600">{maxBags}</p>
+          </CardContent>
+        </Card>
+
+        {/* Go to Procurement Button (user feedback #7) */}
+        <Card 
+          className="bg-gradient-to-br from-amber-500 to-orange-600 text-white cursor-pointer card-hover animate-slide-up stagger-5"
+          onClick={() => navigate('/procurement')}
+        >
+          <CardContent className="p-4 flex flex-col items-center justify-center h-full">
+            <ShoppingCart className="h-6 w-6 mb-1" />
+            <p className="text-sm font-medium text-center">{t('nav.procurement')}</p>
+            <ArrowRight className="h-4 w-4 mt-1" />
           </CardContent>
         </Card>
       </div>

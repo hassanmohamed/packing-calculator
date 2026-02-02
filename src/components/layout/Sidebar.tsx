@@ -59,13 +59,13 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
           {/* Header with close button on mobile */}
           <div>
             <div className="mb-6 flex items-center justify-between">
-              <div className="flex items-center gap-2">
+              <NavLink to="/" onClick={onClose} className="flex items-center gap-2 hover:opacity-80 transition-opacity">
                 <img 
                   src="/logo-full.png" 
                   alt="Ramadan Bag" 
                   className="h-10 w-auto object-contain"
                 />
-              </div>
+              </NavLink>
               <Button
                 variant="ghost"
                 size="icon"
@@ -77,10 +77,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             </div>
 
             {/* App name */}
-            <div className="mb-6 px-2">
+            <NavLink to="/" onClick={onClose} className="block mb-6 px-2 hover:opacity-80 transition-opacity">
               <h1 className="text-lg font-bold text-foreground">{t('app.name')}</h1>
               <p className="text-xs text-muted-foreground">{t('app.description')}</p>
-            </div>
+            </NavLink>
 
             {/* Navigation */}
             <nav className="space-y-1">
