@@ -60,7 +60,7 @@ export function DashboardPage() {
     },
     {
       title: t('dashboard.stats.avgCostPerBag'),
-      value: formatCurrency(getCostPerBag(), i18n.language),
+      value: formatCurrency(getCostPerBag()),
       icon: TrendingUp,
       gradient: 'from-emerald-500 to-teal-500',
     },
@@ -133,7 +133,7 @@ export function DashboardPage() {
           <CardHeader>
             <CardTitle>{t('calculator.bagContents')}</CardTitle>
             <CardDescription>
-              {currentBag.length} {t('common.total')} • {formatCurrency(getCostPerBag(), i18n.language)} {t('calculator.perBag')}
+              {currentBag.length} {t('common.total')} • {formatCurrency(getCostPerBag())} {t('calculator.perBag')}
             </CardDescription>
           </CardHeader>
           <CardContent>

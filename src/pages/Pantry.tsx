@@ -251,10 +251,10 @@ export function PantryPage() {
                         : `${item.units_per_bulk} ${t('common.units')}`}
                     </TableCell>
                     <TableCell>
-                      {formatCurrency(item.bulk_price, i18n.language)}
+                      {formatCurrency(item.bulk_price)}
                     </TableCell>
                     <TableCell className="text-emerald-600 font-medium">
-                      {formatCurrency(item.unit_price, i18n.language)}
+                      {formatCurrency(item.unit_price)}
                     </TableCell>
                     <TableCell>
                       <span className="inline-flex items-center rounded-full bg-muted px-2.5 py-0.5 text-xs font-medium">
@@ -369,7 +369,7 @@ export function PantryPage() {
                 <div className="space-y-2">
                   <Label>{t('pantry.unitPrice')} ({t('common.total')})</Label>
                   <div className="rounded-md border bg-muted px-3 py-2 text-emerald-600 font-medium">
-                    {formatCurrency(calculatedUnitPrice, i18n.language)}
+                    {formatCurrency(calculatedUnitPrice)}
                   </div>
                 </div>
               </div>

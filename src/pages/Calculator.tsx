@@ -265,7 +265,7 @@ export function CalculatorPage() {
               className="mt-1 text-lg font-semibold"
             />
             <p className="mt-1 text-xs text-muted-foreground">
-              {t('calculator.totalCost')}: {formatCurrency(totalCostRequired, i18n.language)}
+              {t('calculator.totalCost')}: {formatCurrency(totalCostRequired)}
             </p>
           </CardContent>
         </Card>
@@ -274,7 +274,7 @@ export function CalculatorPage() {
         <Card className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white card-hover animate-slide-up stagger-3">
           <CardContent className="p-4">
             <p className="text-sm font-medium text-emerald-100">{t('calculator.costPerBag')}</p>
-            <p className="text-2xl font-bold">{formatCurrency(costPerBag, i18n.language)}</p>
+            <p className="text-2xl font-bold">{formatCurrency(costPerBag)}</p>
           </CardContent>
         </Card>
 
@@ -340,7 +340,7 @@ export function CalculatorPage() {
                         {i18n.language === 'ar' ? item.name_ar : item.name_en}
                       </p>
                       <p className="text-sm text-muted-foreground">
-                        {formatCurrency(item.unit_price, i18n.language)}/{t('common.unit')}
+                        {formatCurrency(item.unit_price)}/{t('common.unit')}
                       </p>
                     </div>
                     <Button size="icon" variant="ghost" onClick={() => addItem(item)}>
@@ -361,7 +361,7 @@ export function CalculatorPage() {
               {t('calculator.bagContents')}
             </CardTitle>
             <CardDescription>
-              {currentBag.length} items • {formatCurrency(costPerBag, i18n.language)} {t('calculator.perBag')}
+              {currentBag.length} items • {formatCurrency(costPerBag)} {t('calculator.perBag')}
             </CardDescription>
           </CardHeader>
           <CardContent>
@@ -382,7 +382,7 @@ export function CalculatorPage() {
                         {i18n.language === 'ar' ? bagItem.item.name_ar : bagItem.item.name_en}
                       </p>
                       <p className="text-sm text-emerald-600 font-medium">
-                        {formatCurrency(bagItem.quantity * bagItem.item.unit_price, i18n.language)}
+                        {formatCurrency(bagItem.quantity * bagItem.item.unit_price)}
                       </p>
                     </div>
                     <div className="flex items-center justify-between gap-1 sm:gap-2">

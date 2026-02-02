@@ -220,14 +220,14 @@ export function ProcurementPage() {
             <Card className="card-hover animate-slide-up stagger-2">
               <CardContent className="p-4">
                 <p className="text-sm font-medium text-muted-foreground">{t('calculator.totalBudget')}</p>
-                <p className="text-xl sm:text-2xl font-bold">{formatCurrency(activeBudget, i18n.language)}</p>
+                <p className="text-xl sm:text-2xl font-bold">{formatCurrency(activeBudget)}</p>
               </CardContent>
             </Card>
             <Card className="card-hover animate-slide-up stagger-3">
               <CardContent className="p-4">
                 <p className="text-sm font-medium text-muted-foreground">{t('calculator.maxBags')}</p>
                 <p className="text-xl sm:text-2xl font-bold">{bagCount}</p>
-                <p className="text-xs text-muted-foreground">{formatCurrency(costPerBag, i18n.language)}/{t('calculator.perBag')}</p>
+                <p className="text-xs text-muted-foreground">{formatCurrency(costPerBag)}/{t('calculator.perBag')}</p>
               </CardContent>
             </Card>
             <Card className="card-hover animate-slide-up stagger-4">
@@ -239,7 +239,7 @@ export function ProcurementPage() {
             <Card className="card-hover animate-slide-up stagger-5">
               <CardContent className="p-4">
                 <p className="text-sm font-medium text-muted-foreground">{t('procurement.totalWeight')}</p>
-                <p className="text-xl sm:text-2xl font-bold">{formatNumber(totalWeight, i18n.language)} kg</p>
+                <p className="text-xl sm:text-2xl font-bold">{formatNumber(totalWeight)} {t('common.kg')}</p>
               </CardContent>
             </Card>
             <Card className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white card-hover animate-slide-up stagger-6">
@@ -255,7 +255,7 @@ export function ProcurementPage() {
             <Card className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white card-hover animate-slide-up stagger-7">
               <CardContent className="p-4">
                 <p className="text-sm font-medium text-emerald-100">{t('procurement.grandTotal')}</p>
-                <p className="text-xl sm:text-2xl font-bold">{formatCurrency(grandTotal, i18n.language)}</p>
+                <p className="text-xl sm:text-2xl font-bold">{formatCurrency(grandTotal)}</p>
               </CardContent>
             </Card>
           </div>
@@ -284,24 +284,24 @@ export function ProcurementPage() {
                         <td className="p-3 font-medium">
                           {i18n.language === 'ar' ? pi.item.name_ar : pi.item.name_en}
                         </td>
-                        <td className="text-end p-3">{formatNumber(pi.totalNeeded, i18n.language)}</td>
-                        <td className="text-end p-3">{formatNumber(pi.totalWeight, i18n.language)}</td>
+                        <td className="text-end p-3">{formatNumber(pi.totalNeeded)}</td>
+                        <td className="text-end p-3">{formatNumber(pi.totalWeight)}</td>
                         <td className="text-end p-3">
                           <span className="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900 px-2 py-0.5 text-blue-700 dark:text-blue-300">
-                            {formatNumber(pi.bulksToBuy, i18n.language)}
+                            {formatNumber(pi.bulksToBuy)}
                           </span>
                         </td>
                         <td className="text-end p-3">
                           {pi.looseUnits > 0 ? (
                             <span className="inline-flex items-center rounded-full bg-amber-100 dark:bg-amber-900 px-2 py-0.5 text-amber-700 dark:text-amber-300">
-                              +{formatNumber(pi.looseUnits, i18n.language)}
+                              +{formatNumber(pi.looseUnits)}
                             </span>
                           ) : (
                             <span className="text-muted-foreground">-</span>
                           )}
                         </td>
                         <td className="text-end p-3 font-semibold text-emerald-600">
-                          {formatCurrency(pi.estimatedCost, i18n.language)}
+                          {formatCurrency(pi.estimatedCost)}
                         </td>
                       </tr>
                     ))}
@@ -309,11 +309,11 @@ export function ProcurementPage() {
                   <tfoot>
                     <tr className="border-t bg-muted font-semibold">
                       <td className="p-3">{t('common.total')}</td>
-                      <td className="text-end p-3">{formatNumber(procurementItems.reduce((s, pi) => s + pi.totalNeeded, 0), i18n.language)}</td>
-                      <td className="text-end p-3">{formatNumber(totalWeight, i18n.language)} kg</td>
-                      <td className="text-end p-3">{formatNumber(procurementItems.reduce((s, pi) => s + pi.bulksToBuy, 0), i18n.language)}</td>
-                      <td className="text-end p-3">{formatNumber(procurementItems.reduce((s, pi) => s + pi.looseUnits, 0), i18n.language)}</td>
-                      <td className="text-end p-3 text-emerald-600">{formatCurrency(grandTotal, i18n.language)}</td>
+                      <td className="text-end p-3">{formatNumber(procurementItems.reduce((s, pi) => s + pi.totalNeeded, 0))}</td>
+                      <td className="text-end p-3">{formatNumber(totalWeight)} {t('common.kg')}</td>
+                      <td className="text-end p-3">{formatNumber(procurementItems.reduce((s, pi) => s + pi.bulksToBuy, 0))}</td>
+                      <td className="text-end p-3">{formatNumber(procurementItems.reduce((s, pi) => s + pi.looseUnits, 0))}</td>
+                      <td className="text-end p-3 text-emerald-600">{formatCurrency(grandTotal)}</td>
                     </tr>
                   </tfoot>
                 </table>
@@ -344,7 +344,7 @@ export function ProcurementPage() {
                   {/* Total Needed */}
                   <div className="rounded-lg bg-muted/50 p-3">
                     <p className="text-sm text-muted-foreground">{t('common.total')}</p>
-                    <p className="text-xl font-bold">{formatNumber(pi.totalNeeded, i18n.language)} {t('common.units')}</p>
+                    <p className="text-xl font-bold">{formatNumber(pi.totalNeeded)} {t('common.units')}</p>
                   </div>
 
                   {/* What to Buy */}
@@ -353,12 +353,12 @@ export function ProcurementPage() {
                       {pi.bulksToBuy > 0 && (
                         <div className="inline-flex items-center rounded-full bg-blue-100 dark:bg-blue-900 px-3 py-1 text-sm font-medium text-blue-700 dark:text-blue-300">
                           <ShoppingCart className="h-3 w-3 me-1" />
-                          {formatNumber(pi.bulksToBuy, i18n.language)} {t('procurement.sacks')} ({formatNumber(pi.item.units_per_bulk, i18n.language)} {t('common.unitsEach')})
+                          {formatNumber(pi.bulksToBuy)} {t('procurement.sacks')} ({formatNumber(pi.item.units_per_bulk)} {t('common.unitsEach')})
                         </div>
                       )}
                       {pi.looseUnits > 0 && (
                         <div className="inline-flex items-center rounded-full bg-amber-100 dark:bg-amber-900 px-3 py-1 text-sm font-medium text-amber-700 dark:text-amber-300">
-                          + {formatNumber(pi.looseUnits, i18n.language)} {t('common.units')} {t('procurement.extra')}
+                          + {formatNumber(pi.looseUnits)} {t('common.units')} {t('procurement.extra')}
                         </div>
                       )}
                     </div>
@@ -369,19 +369,19 @@ export function ProcurementPage() {
                     <div className="flex items-center justify-between">
                       <span className="text-sm text-muted-foreground">{t('procurement.estimatedCost')}</span>
                       <span className="text-lg font-bold text-emerald-600">
-                        {formatCurrency(pi.estimatedCost, i18n.language)}
+                        {formatCurrency(pi.estimatedCost)}
                       </span>
                     </div>
                     <div className="text-xs text-muted-foreground mt-1">
                       {pi.bulksToBuy > 0 && (
                         <span>
-                          {formatNumber(pi.bulksToBuy, i18n.language)} × {formatCurrency(pi.item.bulk_price, i18n.language)}
+                          {formatNumber(pi.bulksToBuy)} × {formatCurrency(pi.item.bulk_price)}
                         </span>
                       )}
                       {pi.bulksToBuy > 0 && pi.looseUnits > 0 && <span> + </span>}
                       {pi.looseUnits > 0 && (
                         <span>
-                          {formatNumber(pi.looseUnits, i18n.language)} × {formatCurrency(pi.item.unit_price, i18n.language)}
+                          {formatNumber(pi.looseUnits)} × {formatCurrency(pi.item.unit_price)}
                         </span>
                       )}
                     </div>

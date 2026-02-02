@@ -5,8 +5,10 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-export function formatCurrency(amount: number, locale: string = 'en'): string {
-  return new Intl.NumberFormat(locale === 'ar' ? 'ar-EG' : 'en-US', {
+export function formatCurrency(amount: number): string {
+  // Use international format (10,000,000.25) for both English and Arabic
+  // This is the global standard used in technology and banking
+  return new Intl.NumberFormat('en-US', {
     style: 'decimal',
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -14,8 +16,9 @@ export function formatCurrency(amount: number, locale: string = 'en'): string {
   }).format(amount)
 }
 
-export function formatNumber(num: number, locale: string = 'en'): string {
-  return new Intl.NumberFormat(locale === 'ar' ? 'ar-EG' : 'en-US', {
+export function formatNumber(num: number): string {
+  // Use international format (10,000,000.25) for both English and Arabic
+  return new Intl.NumberFormat('en-US', {
     style: 'decimal',
     maximumFractionDigits: 2,
   }).format(num)

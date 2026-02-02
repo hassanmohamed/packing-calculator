@@ -40,7 +40,8 @@
     "category": "Category",
     "unit": "unit",
     "units": "units",
-    "unitsEach": "units each"
+    "unitsEach": "units each",
+    "kg": "kg"
   },
   "pantry": {
     "title": "Pantry Management",
