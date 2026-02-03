@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { PageNavigation } from '@/components/layout/PageNavigation'
 import {
   Dialog,
   DialogContent,
@@ -532,6 +533,14 @@ export function CalculatorPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Page Navigation */}
+      <PageNavigation 
+        previousPath="/pantry" 
+        previousLabel={t('nav.pantry')} 
+        nextPath="/procurement" 
+        nextLabel={t('nav.procurement')} 
+      />
     </div>
   )
 }

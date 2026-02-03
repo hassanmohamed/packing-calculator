@@ -41,7 +41,9 @@
     "unit": "unit",
     "units": "units",
     "unitsEach": "units each",
-    "kg": "kg"
+    "kg": "kg",
+    "previous": "Previous",
+    "next": "Next"
   },
   "pantry": {
     "title": "Pantry Management",

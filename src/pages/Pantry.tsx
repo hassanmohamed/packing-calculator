@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Plus, Pencil, Trash2, Package } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { PageNavigation } from '@/components/layout/PageNavigation'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
@@ -462,6 +463,14 @@ export function PantryPage() {
           </DialogFooter>
         </DialogContent>
       </Dialog>
+
+      {/* Page Navigation */}
+      <PageNavigation 
+        previousPath="/" 
+        previousLabel={t('nav.dashboard')} 
+        nextPath="/calculator" 
+        nextLabel={t('nav.calculator')} 
+      />
     </div>
   )
 }

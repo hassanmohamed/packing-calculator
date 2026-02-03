@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Package, ShoppingBag, Calculator, ArrowRight, TrendingUp } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+import { PageNavigation } from '@/components/layout/PageNavigation'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/hooks/useAuth'
 import { useBagStore } from '@/hooks/useBagStore'
@@ -163,6 +164,12 @@ export function DashboardPage() {
           </CardContent>
         </Card>
       )}
+
+      {/* Page Navigation */}
+      <PageNavigation 
+        nextPath="/pantry" 
+        nextLabel={t('nav.pantry')} 
+      />
     </div>
   )
 }

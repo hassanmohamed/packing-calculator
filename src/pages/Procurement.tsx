@@ -2,6 +2,7 @@ import { useEffect, useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
 import { ShoppingCart, Package, AlertCircle, Truck } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
+import { PageNavigation } from '@/components/layout/PageNavigation'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import {
@@ -411,6 +412,12 @@ export function ProcurementPage() {
           </div>
         </>
       )}
+
+      {/* Page Navigation */}
+      <PageNavigation 
+        previousPath="/calculator" 
+        previousLabel={t('nav.calculator')} 
+      />
     </div>
   )
 }
