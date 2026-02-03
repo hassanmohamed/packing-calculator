@@ -19,7 +19,7 @@
     --secondary-foreground: 150 14% 20%;
     --muted: 150 15% 94%;
     --muted-foreground: 150 10% 45%;
-    --accent: 270 50% 50%;
+    --accent: 12 76% 61%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -28,13 +28,13 @@
     --ring: 158 64% 52%;
     --radius: 0.625rem;
     
-    /* Custom Ramadan colors */
+    /* Custom theme colors */
     --gold: 158 64% 52%;
     --gold-light: 158 64% 65%;
     --gold-dark: 158 64% 40%;
-    --purple: 270 50% 50%;
-    --purple-light: 270 50% 65%;
-    --purple-dark: 270 50% 35%;
+    --purple: 12 76% 61%;
+    --purple-light: 12 76% 72%;
+    --purple-dark: 12 76% 50%;
     --emerald: 158 64% 52%;
   }
 
@@ -52,7 +52,7 @@
     --secondary-foreground: 150 20% 90%;
     --muted: 260 20% 18%;
     --muted-foreground: 150 15% 60%;
-    --accent: 270 50% 60%;
+    --accent: 12 76% 65%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 62.8% 50%;
     --destructive-foreground: 210 40% 98%;
