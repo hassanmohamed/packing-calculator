@@ -5,7 +5,7 @@
   },
   "nav": {
     "dashboard": "Dashboard",
-    "pantry": "Pantry",
+    "pantry": "Store",
     "calculator": "Bag Calculator",
     "procurement": "Procurement List"
   },
@@ -46,7 +46,7 @@
     "next": "Next"
   },
   "pantry": {
-    "title": "Pantry Management",
+    "title": "Store Management",
     "subtitle": "Manage your inventory items and prices",
     "addItem": "Add Item",
     "editItem": "Edit Item",
