@@ -48,7 +48,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
       {/* Sidebar */}
       <aside 
         className={cn(
-          "fixed start-0 top-0 z-50 h-screen w-64 border-e bg-card transition-transform duration-300",
+          "fixed start-0 top-0 z-50 h-screen w-64 border-e bg-card sidebar-gradient transition-transform duration-300",
           // Mobile: slide in/out
           isOpen ? "translate-x-0" : "-translate-x-full rtl:translate-x-full",
           // Desktop: always visible

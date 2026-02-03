@@ -14,7 +14,7 @@ export function BottomNav() {
   ]
 
   return (
-    <nav className="fixed bottom-0 start-0 end-0 z-50 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 lg:hidden">
+    <nav className="fixed bottom-0 start-0 end-0 z-50 border-t bottom-nav-gradient lg:hidden">
       <div className="flex items-center justify-around py-2">
         {navItems.map((item) => (
           <NavLink

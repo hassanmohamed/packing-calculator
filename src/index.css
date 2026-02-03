@@ -6,48 +6,59 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 160 84% 39%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* Ramadan Golden Warmth Theme */
+    --background: 40 30% 99%;
+    --foreground: 20 14% 12%;
+    --card: 40 40% 99%;
+    --card-foreground: 20 14% 12%;
+    --popover: 40 40% 99%;
+    --popover-foreground: 20 14% 12%;
+    --primary: 45 93% 47%;
+    --primary-foreground: 20 14% 12%;
+    --secondary: 40 30% 94%;
+    --secondary-foreground: 20 14% 20%;
+    --muted: 40 20% 94%;
+    --muted-foreground: 20 10% 45%;
+    --accent: 270 50% 50%;
+    --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 160 84% 39%;
-    --radius: 0.5rem;
+    --border: 40 30% 88%;
+    --input: 40 30% 88%;
+    --ring: 45 93% 47%;
+    --radius: 0.625rem;
+    
+    /* Custom Ramadan colors */
+    --gold: 45 93% 47%;
+    --gold-light: 45 93% 60%;
+    --gold-dark: 45 93% 35%;
+    --purple: 270 50% 50%;
+    --purple-light: 270 50% 65%;
+    --purple-dark: 270 50% 35%;
+    --emerald: 160 84% 39%;
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 160 84% 45%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
+    /* Dark mode with night sky feel */
+    --background: 260 30% 8%;
+    --foreground: 40 30% 95%;
+    --card: 260 25% 12%;
+    --card-foreground: 40 30% 95%;
+    --popover: 260 25% 12%;
+    --popover-foreground: 40 30% 95%;
+    --primary: 45 93% 55%;
+    --primary-foreground: 260 30% 8%;
+    --secondary: 260 20% 18%;
+    --secondary-foreground: 40 30% 90%;
+    --muted: 260 20% 18%;
+    --muted-foreground: 40 20% 60%;
+    --accent: 270 50% 60%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 62.8% 50%;
     --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 160 84% 45%;
+    --border: 260 20% 20%;
+    --input: 260 20% 20%;
+    --ring: 45 93% 55%;
   }
 }
 
@@ -215,4 +226,126 @@
 /* Initial state for animated elements (prevents flash) */
 .animate-on-load {
   opacity: 0;
+}
+
+/* ===== Ramadan Theme Enhancements ===== */
+
+/* Gold glow on primary buttons */
+.btn-gold-glow {
+  box-shadow: 0 0 20px hsl(var(--gold) / 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.btn-gold-glow:hover {
+  box-shadow: 0 0 30px hsl(var(--gold) / 0.5);
+}
+
+/* Warm card shadows */
+.card-warm-shadow {
+  box-shadow: 0 4px 20px hsl(var(--gold) / 0.08), 
+              0 2px 8px hsl(var(--gold) / 0.04);
+}
+
+/* Purple accent gradient */
+.gradient-accent {
+  background: linear-gradient(135deg, 
+    hsl(var(--purple)) 0%, 
+    hsl(var(--gold)) 100%);
+}
+
+/* Sidebar gradient background */
+.sidebar-gradient {
+  background: linear-gradient(180deg, 
+    hsl(var(--background)) 0%, 
+    hsl(var(--gold) / 0.05) 50%,
+    hsl(var(--purple) / 0.08) 100%);
+}
+
+/* Dark mode sidebar */
+.dark .sidebar-gradient {
+  background: linear-gradient(180deg, 
+    hsl(var(--background)) 0%, 
+    hsl(var(--purple) / 0.15) 50%,
+    hsl(var(--gold) / 0.1) 100%);
+}
+
+/* Decorative star pattern (subtle) */
+.stars-pattern {
+  background-image: radial-gradient(hsl(var(--gold) / 0.15) 1px, transparent 1px);
+  background-size: 30px 30px;
+}
+
+/* Lantern glow effect */
+.lantern-glow {
+  position: relative;
+}
+
+.lantern-glow::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(circle, hsl(var(--gold) / 0.3) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* Crescent moon decorative element */
+.crescent-decoration {
+  position: relative;
+}
+
+.crescent-decoration::after {
+  content: '☪';
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: 1.5rem;
+  color: hsl(var(--gold));
+  opacity: 0.3;
+}
+
+/* Enhanced button styles */
+button[data-primary="true"],
+.btn-primary {
+  background: linear-gradient(135deg, 
+    hsl(var(--gold)) 0%, 
+    hsl(var(--gold-dark)) 100%);
+  border: none;
+  color: hsl(var(--primary-foreground));
+}
+
+/* Metric cards with subtle gold border */
+.metric-card {
+  border: 1px solid hsl(var(--gold) / 0.2);
+  background: linear-gradient(180deg, 
+    hsl(var(--card)) 0%, 
+    hsl(var(--gold) / 0.03) 100%);
+}
+
+/* Dark mode metric card */
+.dark .metric-card {
+  border: 1px solid hsl(var(--gold) / 0.15);
+  background: linear-gradient(180deg, 
+    hsl(var(--card)) 0%, 
+    hsl(var(--gold) / 0.05) 100%);
+}
+
+/* Text gold highlight */
+.text-gold {
+  color: hsl(var(--gold));
+}
+
+.text-purple {
+  color: hsl(var(--purple));
+}
+
+/* Bottom nav with subtle gradient */
+.bottom-nav-gradient {
+  background: linear-gradient(180deg, 
+    hsl(var(--background) / 0.95) 0%, 
+    hsl(var(--gold) / 0.05) 100%);
+  backdrop-filter: blur(10px);
 }
