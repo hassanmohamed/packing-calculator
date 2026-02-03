@@ -5,7 +5,7 @@ import { Package, ShoppingBag, Calculator, ArrowRight, TrendingUp, HelpCircle } 
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { PageNavigation } from '@/components/layout/PageNavigation'
-import { ProductTour } from '@/components/ProductTour'
+import { useProductTour } from '@/components/ProductTour'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/hooks/useAuth'
 import { useBagStore } from '@/hooks/useBagStore'
@@ -15,6 +15,7 @@ export function DashboardPage() {
   const { t, i18n } = useTranslation()
   const { user } = useAuth()
   const { getCostPerBag, currentBag } = useBagStore()
+  const { resetAndStartTour } = useProductTour()
   const [stats, setStats] = useState({
     totalItems: 0,
     savedBags: 0,
@@ -52,19 +53,22 @@ export function DashboardPage() {
       title: t('dashboard.stats.totalItems'),
       value: stats.totalItems,
       icon: Package,
-      gradient: 'from-blue-500 to-cyan-500',
+      color: 'text-blue-500',
+      bgColor: 'bg-blue-500/10',
     },
     {
       title: t('dashboard.stats.savedBags'),
       value: stats.savedBags,
       icon: ShoppingBag,
-      gradient: 'from-purple-500 to-pink-500',
+      color: 'text-emerald-500',
+      bgColor: 'bg-emerald-500/10',
     },
     {
       title: t('dashboard.stats.avgCostPerBag'),
       value: formatCurrency(getCostPerBag()),
       icon: TrendingUp,
-      gradient: 'from-emerald-500 to-teal-500',
+      color: 'text-amber-500',
+      bgColor: 'bg-amber-500/10',
     },
   ]
 
@@ -84,12 +88,7 @@ export function DashboardPage() {
         <Button 
           variant="outline" 
           size="sm"
-          onClick={() => {
-            // Reset and start tour
-            localStorage.removeItem('product-tour-completed')
-            const { startTour } = ProductTour({ autoStart: false })
-            startTour()
-          }}
+          onClick={resetAndStartTour}
           className="gap-2"
         >
           <HelpCircle className="h-4 w-4" />
