@@ -128,5 +128,40 @@
     "en": "English",
     "ar": "العربية",
     "toggle": "Toggle Language"
+  },
+  "tour": {
+    "next": "Next",
+    "prev": "Back",
+    "done": "Get Started!",
+    "skip": "Skip Tour",
+    "welcome": {
+      "title": "Welcome to Charity Bag! 👋",
+      "description": "Let us show you around. This quick tour will help you understand how to plan your charity bag packing events efficiently."
+    },
+    "sidebar": {
+      "title": "Navigation Menu",
+      "description": "Use this sidebar to navigate between different sections of the app. Click on any item to go to that page."
+    },
+    "store": {
+      "title": "Store Management 📦",
+      "description": "Start here! Add all your inventory items with their bulk prices. This is where you manage everything you'll pack into charity bags."
+    },
+    "calculator": {
+      "title": "Bag Calculator 🧮",
+      "description": "Design your charity bags here. Add items from your store, set quantities per bag, and see the cost breakdown instantly."
+    },
+    "procurement": {
+      "title": "Procurement List 🛒",
+      "description": "Once you've designed a bag and set your budget, get your shopping list here. It calculates exactly how many bulk packs to buy."
+    },
+    "language": {
+      "title": "Language Switch 🌍",
+      "description": "Switch between English and Arabic anytime. The entire app supports both languages and RTL layout."
+    },
+    "complete": {
+      "title": "You're All Set! 🎉",
+      "description": "Start by adding items to your Store, then design your bag in the Calculator. Happy packing!"
+    },
+    "startTour": "Take a Tour"
   }
 }

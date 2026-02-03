@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { Package, ShoppingBag, Calculator, ArrowRight, TrendingUp } from 'lucide-react'
+import { Package, ShoppingBag, Calculator, ArrowRight, TrendingUp, HelpCircle } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { PageNavigation } from '@/components/layout/PageNavigation'
+import { ProductTour } from '@/components/ProductTour'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/hooks/useAuth'
 import { useBagStore } from '@/hooks/useBagStore'
@@ -75,9 +76,25 @@ export function DashboardPage() {
   return (
     <div className="space-y-8 page-transition">
       {/* Header */}
-      <div className="animate-slide-up">
-        <h1 className="text-3xl font-bold tracking-tight">{t('dashboard.welcome')}</h1>
-        <p className="text-muted-foreground">{t('dashboard.subtitle')}</p>
+      <div className="animate-slide-up flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold tracking-tight">{t('dashboard.welcome')}</h1>
+          <p className="text-muted-foreground">{t('dashboard.subtitle')}</p>
+        </div>
+        <Button 
+          variant="outline" 
+          size="sm"
+          onClick={() => {
+            // Reset and start tour
+            localStorage.removeItem('product-tour-completed')
+            const { startTour } = ProductTour({ autoStart: false })
+            startTour()
+          }}
+          className="gap-2"
+        >
+          <HelpCircle className="h-4 w-4" />
+          {t('tour.startTour')}
+        </Button>
       </div>
 
       {/* Stats Grid */}

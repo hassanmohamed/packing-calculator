@@ -29,10 +29,10 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
   }
 
   const navItems = [
-    { to: '/', icon: LayoutDashboard, label: t('nav.dashboard') },
-    { to: '/pantry', icon: Package, label: t('nav.pantry') },
-    { to: '/calculator', icon: Calculator, label: t('nav.calculator') },
-    { to: '/procurement', icon: ShoppingCart, label: t('nav.procurement') },
+    { to: '/', icon: LayoutDashboard, label: t('nav.dashboard'), tourId: 'dashboard' },
+    { to: '/pantry', icon: Package, label: t('nav.pantry'), tourId: 'store' },
+    { to: '/calculator', icon: Calculator, label: t('nav.calculator'), tourId: 'calculator' },
+    { to: '/procurement', icon: ShoppingCart, label: t('nav.procurement'), tourId: 'procurement' },
   ]
 
   return (
@@ -83,12 +83,13 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             </NavLink>
 
             {/* Navigation */}
-            <nav className="space-y-1">
+            <nav className="space-y-1" data-tour="sidebar">
               {navItems.map((item) => (
                 <NavLink
                   key={item.to}
                   to={item.to}
                   onClick={onClose}
+                  data-tour={item.tourId}
                   className={({ isActive }) =>
                     cn(
                       'flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-all',
@@ -111,6 +112,7 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
               variant="ghost"
               className="w-full justify-start gap-3"
               onClick={toggleLanguage}
+              data-tour="language"
             >
               <Languages className="h-5 w-5" />
               {i18n.language === 'ar' ? t('language.en') : t('language.ar')}
