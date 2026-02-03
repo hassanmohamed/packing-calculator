@@ -595,13 +595,14 @@ button[data-primary="true"],
 }
 
 /* RTL Support - Simplified thanks to Flexbox! */
-[dir="rtl"] .introjs-tooltip-header {
-  flex-direction: row-reverse !important; /* Swap Title and Skip */
-}
+/* We want distinct order in RTL: Title (Right) -> Skip (Left) 
+   Default flex-direction: row with dir="rtl" does exactly this (Start=Right).
+   So we DO NOT want row-reverse here. */
 
 /* Tooltip footer RTL */
 [dir="rtl"] .introjs-tooltipbuttons {
-  flex-direction: row-reverse !important;
+  /* Keep default row behavior for buttons too: Prev (Right), Next (Left) */
+  /* If specific ordering is needed, use 'order' property on button classes */
 }
 
 /* If Intro.js uses order: 1/2 for buttons inside footer */
