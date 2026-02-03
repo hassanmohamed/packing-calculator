@@ -15,7 +15,7 @@ export function DashboardPage() {
   const { t, i18n } = useTranslation()
   const { user } = useAuth()
   const { getCostPerBag, currentBag } = useBagStore()
-  const { resetAndStartTour } = useProductTour()
+  const { resetAndStartTour, startTour } = useProductTour()
   const [stats, setStats] = useState({
     totalItems: 0,
     savedBags: 0,
@@ -47,6 +47,20 @@ export function DashboardPage() {
 
     fetchStats()
   }, [user])
+
+  // Auto-start tour for new users
+  useEffect(() => {
+    // Small delay to ensure everything is rendered
+    const timer = setTimeout(() => {
+      const tourCompleted = localStorage.getItem('product-tour-completed')
+      if (!tourCompleted) {
+        // Trigger tour
+        startTour()
+      }
+    }, 1000)
+    
+    return () => clearTimeout(timer)
+  }, [startTour])
 
   const statCards = [
     {
@@ -111,8 +125,8 @@ export function DashboardPage() {
                     {loading ? '...' : stat.value}
                   </p>
                 </div>
-                <div className={`rounded-full bg-gradient-to-br ${stat.gradient} p-3 transition-transform hover:scale-110`}>
-                  <stat.icon className="h-6 w-6 text-white" />
+                <div className={`rounded-full ${stat.bgColor} p-3 transition-transform hover:scale-110`}>
+                  <stat.icon className={`h-6 w-6 ${stat.color}`} />
                 </div>
               </div>
             </CardContent>
