@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { Link } from 'react-router-dom'
-import { Package, ShoppingBag, Calculator, ArrowRight, TrendingUp } from 'lucide-react'
+import { Package, ShoppingBag, Calculator, ArrowRight, TrendingUp, HelpCircle } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
 import { PageNavigation } from '@/components/layout/PageNavigation'
+import { useProductTour } from '@/components/ProductTour'
 import { supabase } from '@/lib/supabase'
 import { useAuth } from '@/hooks/useAuth'
 import { useBagStore } from '@/hooks/useBagStore'
@@ -14,6 +15,7 @@ export function DashboardPage() {
   const { t, i18n } = useTranslation()
   const { user } = useAuth()
   const { getCostPerBag, currentBag } = useBagStore()
+  const { resetAndStartTour, startTour } = useProductTour()
 
   const [stats, setStats] = useState({
     totalItems: 0,
@@ -86,7 +88,16 @@ export function DashboardPage() {
           <h1 className="text-3xl font-bold tracking-tight">{t('dashboard.welcome')}</h1>
           <p className="text-muted-foreground">{t('dashboard.subtitle')}</p>
         </div>
-
+        {/* Tour button - Desktop only */}
+        <Button 
+          variant="outline" 
+          size="sm"
+          onClick={resetAndStartTour}
+          className="hidden lg:flex gap-2"
+        >
+          <HelpCircle className="h-4 w-4" />
+          {t('tour.startTour')}
+        </Button>
       </div>
 
       {/* Stats Grid */}

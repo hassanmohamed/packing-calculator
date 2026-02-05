@@ -349,3 +349,82 @@ button[data-primary="true"],
     hsl(var(--gold) / 0.05) 100%);
   backdrop-filter: blur(10px);
 }
+
+/* ===== Intro.js Product Tour Theme ===== */
+.introjs-tooltip.product-tour-tooltip {
+  background: hsl(var(--card));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.75rem;
+  box-shadow: 0 10px 40px hsl(0 0% 0% / 0.15);
+  min-width: 400px;
+  max-width: 450px;
+}
+
+.introjs-tooltip-header {
+  background: hsl(var(--muted) / 0.5);
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid hsl(var(--border));
+}
+
+.introjs-tooltip-title {
+  color: hsl(var(--foreground));
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.introjs-tooltiptext {
+  padding: 1.25rem;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.6;
+}
+
+.introjs-tooltipbuttons {
+  padding: 1rem 1.25rem;
+  border-top: 1px solid hsl(var(--border));
+  display: flex;
+  gap: 0.5rem;
+  justify-content: flex-end;
+}
+
+.introjs-button {
+  background: hsl(var(--primary));
+  color: hsl(var(--primary-foreground));
+  border: none;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.introjs-button:hover {
+  opacity: 0.9;
+}
+
+.introjs-prevbutton {
+  background: hsl(var(--secondary));
+  color: hsl(var(--secondary-foreground));
+}
+
+.introjs-skipbutton {
+  background: transparent;
+  color: hsl(var(--muted-foreground));
+  margin-right: auto;
+}
+
+.introjs-helperLayer {
+  border-radius: 0.5rem;
+  box-shadow: 0 0 0 4px hsl(var(--primary) / 0.3), 0 0 0 9999px rgba(0,0,0,0.5);
+}
+
+.introjs-arrow.top { border-bottom-color: hsl(var(--card)); }
+.introjs-arrow.bottom { border-top-color: hsl(var(--card)); }
+.introjs-arrow.left { border-right-color: hsl(var(--card)); }
+.introjs-arrow.right { border-left-color: hsl(var(--card)); }
+
+/* RTL adjustments */
+[dir="rtl"] .introjs-skipbutton {
+  margin-right: 0;
+  margin-left: auto;
+}

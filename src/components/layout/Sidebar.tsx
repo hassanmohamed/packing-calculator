@@ -106,8 +106,8 @@ export function Sidebar({ isOpen, onClose }: SidebarProps) {
             </nav>
           </div>
 
-          {/* Bottom actions */}
-          <div className="space-y-2 border-t pt-4">
+          {/* Bottom actions - pb-20 on mobile to clear bottom nav */}
+          <div className="space-y-2 border-t pt-4 pb-20 lg:pb-4">
             <Button
               variant="ghost"
               className="w-full justify-start gap-3"
