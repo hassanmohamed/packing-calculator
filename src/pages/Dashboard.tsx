@@ -16,7 +16,6 @@ export function DashboardPage() {
   const { user } = useAuth()
   const { getCostPerBag, currentBag } = useBagStore()
   const { resetAndStartTour, startTour } = useProductTour()
-
   const [stats, setStats] = useState({
     totalItems: 0,
     savedBags: 0,
@@ -49,7 +48,23 @@ export function DashboardPage() {
     fetchStats()
   }, [user])
 
-
+  // Auto-start tour for new users (desktop only)
+  useEffect(() => {
+    // Only auto-start on desktop (lg breakpoint = 1024px)
+    const isDesktop = window.innerWidth >= 1024
+    if (!isDesktop) return
+    
+    // Small delay to ensure everything is rendered
+    const timer = setTimeout(() => {
+      const tourCompleted = localStorage.getItem('product-tour-completed')
+      if (!tourCompleted) {
+        // Trigger tour
+        startTour()
+      }
+    }, 1000)
+    
+    return () => clearTimeout(timer)
+  }, [startTour])
 
   const statCards = [
     {
@@ -88,7 +103,6 @@ export function DashboardPage() {
           <h1 className="text-3xl font-bold tracking-tight">{t('dashboard.welcome')}</h1>
           <p className="text-muted-foreground">{t('dashboard.subtitle')}</p>
         </div>
-        {/* Tour button - Desktop only */}
         <Button 
           variant="outline" 
           size="sm"

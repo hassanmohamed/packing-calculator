@@ -45,7 +45,7 @@ export function useProductTour() {
           element: '[data-tour="language"]',
           title: t('tour.language.title'),
           intro: t('tour.language.description'),
-          position: 'top',
+          position: 'bottom',
         },
         {
           title: t('tour.complete.title'),
