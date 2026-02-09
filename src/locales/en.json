@@ -109,8 +109,18 @@
     "savedBagsHistory": "Saved Bags",
     "totalWeight": "Total Weight",
     "trucksNeeded": "Pickup Trucks Needed",
-    "perTruck": "per truck (1000 kg)",
-    "summaryTable": "Quick Summary"
+    "perTruck": "per truck (2000 kg)",
+    "summaryTable": "Quick Summary",
+    "exportCSV": "Export CSV",
+    "savedBudget": "Budget saved with this bag",
+    "table": {
+      "item": "Item Name",
+      "qtyPerBag": "Qty per Bag",
+      "totalNeeded": "Total Units Needed",
+      "bulks": "Sacks/Cartons to Buy",
+      "loose": "Loose Units",
+      "cost": "Estimated Cost (EGP)"
+    }
   },
   "dashboard": {
     "title": "Dashboard",

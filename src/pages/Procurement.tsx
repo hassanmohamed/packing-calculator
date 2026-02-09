@@ -1,9 +1,9 @@
 import { useEffect, useState, useMemo } from 'react'
 import { useTranslation } from 'react-i18next'
-import { ShoppingCart, Package, AlertCircle, Truck } from 'lucide-react'
+import { ShoppingCart, Package, AlertCircle, Truck, Download } from 'lucide-react'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { PageNavigation } from '@/components/layout/PageNavigation'
-import { Input } from '@/components/ui/input'
+import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import {
   Select,
@@ -139,14 +139,82 @@ export function ProcurementPage() {
 
   const grandTotal = procurementItems.reduce((sum, pi) => sum + pi.estimatedCost, 0)
   const totalWeight = procurementItems.reduce((sum, pi) => sum + pi.totalWeight, 0)
-  const trucksNeeded = Math.ceil(totalWeight / 1000) // 1000 kg per pickup truck
+  const trucksNeeded = Math.ceil(totalWeight / 2000) // 2000 kg per pickup truck
+
+  // CSV Export function
+  const exportToCSV = () => {
+    if (procurementItems.length === 0) return
+
+    const isArabic = i18n.language === 'ar'
+    
+    // Headers in selected language
+    const headers = [
+      t('procurement.table.item'),
+      t('procurement.table.qtyPerBag'),
+      t('procurement.table.totalNeeded'),
+      t('procurement.table.bulks'),
+      t('procurement.table.loose'),
+      t('procurement.table.cost'),
+    ]
+
+    // Build rows
+    const rows = procurementItems.map((pi) => [
+      isArabic ? pi.item.name_ar : pi.item.name_en,
+      pi.quantityPerBag,
+      pi.totalNeeded,
+      pi.bulksToBuy,
+      pi.looseUnits,
+      pi.estimatedCost.toFixed(2),
+    ])
+
+    // Add totals row
+    rows.push([
+      t('procurement.grandTotal'),
+      '',
+      '',
+      '',
+      '',
+      grandTotal.toFixed(2),
+    ])
+
+    // Build CSV string
+    const csvContent = [
+      headers.join(','),
+      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
+    ].join('\n')
+
+    // Add BOM for Arabic/UTF-8 support
+    const bom = '\uFEFF'
+    const blob = new Blob([bom + csvContent], { type: 'text/csv;charset=utf-8;' })
+    const url = URL.createObjectURL(blob)
+    
+    const link = document.createElement('a')
+    link.href = url
+    link.download = `procurement_${new Date().toISOString().split('T')[0]}.csv`
+    link.click()
+    
+    URL.revokeObjectURL(url)
+  }
 
   return (
     <div className="space-y-6 page-transition">
       {/* Header */}
-      <div className="animate-slide-up">
-        <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">{t('procurement.title')}</h1>
-        <p className="text-muted-foreground text-sm sm:text-base">{t('procurement.subtitle')}</p>
+      <div className="animate-slide-up flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+        <div>
+          <h1 className="text-2xl sm:text-3xl font-bold tracking-tight">{t('procurement.title')}</h1>
+          <p className="text-muted-foreground text-sm sm:text-base">{t('procurement.subtitle')}</p>
+        </div>
+        {procurementItems.length > 0 && (
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={exportToCSV}
+            className="gap-2 self-start sm:self-auto"
+          >
+            <Download className="h-4 w-4" />
+            {t('procurement.exportCSV')}
+          </Button>
+        )}
       </div>
 
       {/* Bag Selector & Budget */}
@@ -175,14 +243,22 @@ export function ProcurementPage() {
                       <div className="px-2 py-1.5 text-xs font-semibold text-muted-foreground border-t mt-1 pt-2">
                         {t('procurement.savedBagsHistory')}
                       </div>
-                      {savedBags.map((bag) => (
-                        <SelectItem key={bag.id} value={bag.id}>
-                          <div className="flex items-center gap-2">
-                            <span className="inline-block w-2 h-2 rounded-full bg-blue-400"></span>
-                            {bag.name}
-                          </div>
-                        </SelectItem>
-                      ))}
+                      {savedBags.map((bag) => {
+                        const date = new Date(bag.created_at || Date.now())
+                        const dateStr = date.toLocaleDateString(i18n.language === 'ar' ? 'ar-EG' : 'en-US', {
+                          month: 'short',
+                          day: 'numeric',
+                        })
+                        return (
+                          <SelectItem key={bag.id} value={bag.id}>
+                            <div className="flex items-center gap-2">
+                              <span className="inline-block w-2 h-2 rounded-full bg-blue-400"></span>
+                              <span>{bag.name}</span>
+                              <span className="text-xs text-muted-foreground">({dateStr})</span>
+                            </div>
+                          </SelectItem>
+                        )
+                      })}
                     </>
                   )}
                 </SelectContent>
@@ -192,18 +268,16 @@ export function ProcurementPage() {
               )}
             </div>
 
-            {/* Budget Input (for saved bags) */}
+            {/* Budget Display (read-only for saved bags) */}
             {selectedBagId !== 'current' && (
               <div className="space-y-2">
-                <Label htmlFor="budget">{t('calculator.totalBudget')}</Label>
-                <Input
-                  id="budget"
-                  type="number"
-                  min="0"
-                  value={budget || ''}
-                  onChange={(e) => setBudget(parseFloat(e.target.value) || 0)}
-                  className="text-lg font-semibold"
-                />
+                <Label>{t('calculator.totalBudget')}</Label>
+                <div className="text-lg font-semibold p-2 bg-muted rounded-md">
+                  {formatCurrency(budget)}
+                </div>
+                <p className="text-xs text-muted-foreground">
+                  {t('procurement.savedBudget')}
+                </p>
               </div>
             )}
           </div>

@@ -109,8 +109,18 @@
     "savedBagsHistory": "الشنط المحفوظة",
     "totalWeight": "الوزن الإجمالي",
     "trucksNeeded": "عدد النصف نقل المطلوبة",
-    "perTruck": "لكل نقل (1000 كجم)",
-    "summaryTable": "ملخص سريع"
+    "perTruck": "لكل نقل (2000 كجم)",
+    "summaryTable": "ملخص سريع",
+    "exportCSV": "تصدير CSV",
+    "savedBudget": "الميزانية المحفوظة مع هذه الشنطة",
+    "table": {
+      "item": "اسم الصنف",
+      "qtyPerBag": "الكمية لكل شنطة",
+      "totalNeeded": "إجمالي الوحدات المطلوبة",
+      "bulks": "عدد الشكاير/الكراتين",
+      "loose": "الفرط",
+      "cost": "التكلفة التقديرية (جنيه)"
+    }
   },
   "dashboard": {
     "title": "الرئيسية",

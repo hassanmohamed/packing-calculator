@@ -33,14 +33,12 @@ export function CalculatorPage() {
     addItem,
     removeItem,
     updateQuantity,
-    setTargetCount,
     setTotalBudget,
     setBagName,
     clearBag,
     loadBag,
     getCostPerBag,
     getMaxBags,
-    getTotalCostRequired,
   } = useBagStore()
 
   const [items, setItems] = useState<Item[]>([])
@@ -91,23 +89,52 @@ export function CalculatorPage() {
 
     setSaving(true)
     try {
-      // Create bag template
-      const { data: bagTemplate, error: bagError } = await supabase
-        .from('bag_templates')
-        .insert({
-          name: bagName,
-          target_count: targetCount,
-          total_budget: totalBudget,
-          user_id: user.id,
-        })
-        .select()
-        .single()
+      // Check if a bag with this name already exists
+      const existingBag = savedBags.find(
+        (b) => b.name.toLowerCase() === bagName.trim().toLowerCase()
+      )
 
-      if (bagError) throw bagError
+      let bagTemplateId: string
+
+      if (existingBag) {
+        // Update existing bag - first delete old items
+        await supabase
+          .from('bag_items')
+          .delete()
+          .eq('bag_id', existingBag.id)
+
+        // Update the template
+        const { error: updateError } = await supabase
+          .from('bag_templates')
+          .update({
+            target_count: targetCount,
+            total_budget: totalBudget,
+            updated_at: new Date().toISOString(),
+          })
+          .eq('id', existingBag.id)
+
+        if (updateError) throw updateError
+        bagTemplateId = existingBag.id
+      } else {
+        // Create new bag template
+        const { data: bagTemplate, error: bagError } = await supabase
+          .from('bag_templates')
+          .insert({
+            name: bagName,
+            target_count: targetCount,
+            total_budget: totalBudget,
+            user_id: user.id,
+          })
+          .select()
+          .single()
+
+        if (bagError) throw bagError
+        bagTemplateId = bagTemplate.id
+      }
 
       // Insert bag items
       const bagItems = currentBag.map((bi) => ({
-        bag_id: bagTemplate.id,
+        bag_id: bagTemplateId,
         item_id: bi.item.id,
         quantity: bi.quantity,
       }))
@@ -206,7 +233,6 @@ export function CalculatorPage() {
 
   const costPerBag = getCostPerBag()
   const maxBags = getMaxBags()
-  const totalCostRequired = getTotalCostRequired()
 
   return (
     <div className="space-y-6 page-transition">
@@ -251,25 +277,7 @@ export function CalculatorPage() {
           </CardContent>
         </Card>
 
-        {/* Target Bag Count - Second */}
-        <Card className="animate-slide-up stagger-2">
-          <CardContent className="p-4">
-            <Label htmlFor="targetCount" className="text-sm text-muted-foreground">
-              {t('calculator.targetBags')}
-            </Label>
-            <Input
-              id="targetCount"
-              type="number"
-              min="0"
-              value={targetCount || ''}
-              onChange={(e) => setTargetCount(parseInt(e.target.value) || 0)}
-              className="mt-1 text-lg font-semibold"
-            />
-            <p className="mt-1 text-xs text-muted-foreground">
-              {t('calculator.totalCost')}: {formatCurrency(totalCostRequired)}
-            </p>
-          </CardContent>
-        </Card>
+
 
         {/* Cost Per Bag */}
         <Card className="bg-gradient-to-br from-emerald-500 to-teal-600 text-white card-hover animate-slide-up stagger-3">
