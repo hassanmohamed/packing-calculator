@@ -23,6 +23,7 @@ interface BagStore {
   setBagName: (name: string) => void
   clearBag: () => void
   loadBag: (template: BagTemplate, items: BagItemWithDetails[]) => void
+  syncItemPrices: (freshItems: Item[]) => void
   
   // Computed values
   getCostPerBag: () => number
@@ -101,6 +102,22 @@ export const useBagStore = create<BagStore>()(
             quantity: bi.quantity
           }))
         })
+      },
+      
+      syncItemPrices: (freshItems) => {
+        const { currentBag } = get()
+        if (currentBag.length === 0) return
+        
+        const itemMap = new Map(freshItems.map(item => [item.id, item]))
+        const updatedBag = currentBag.map(bi => {
+          const freshItem = itemMap.get(bi.item.id)
+          if (freshItem) {
+            return { ...bi, item: freshItem }
+          }
+          return bi
+        })
+        
+        set({ currentBag: updatedBag })
       },
       
       getCostPerBag: () => {

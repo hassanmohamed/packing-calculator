@@ -37,6 +37,7 @@ export function CalculatorPage() {
     setBagName,
     clearBag,
     loadBag,
+    syncItemPrices,
     getCostPerBag,
     getMaxBags,
   } = useBagStore()
@@ -65,6 +66,11 @@ export function CalculatorPage() {
 
         if (itemsError) throw itemsError
         setItems(itemsData || [])
+        
+        // Sync current bag with latest item prices
+        if (itemsData) {
+          syncItemPrices(itemsData)
+        }
 
         // Fetch saved bag templates
         const { data: bagsData, error: bagsError } = await supabase
