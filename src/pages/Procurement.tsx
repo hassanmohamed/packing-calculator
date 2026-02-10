@@ -160,10 +160,10 @@ export function ProcurementPage() {
     // Build rows
     const rows = procurementItems.map((pi) => [
       isArabic ? pi.item.name_ar : pi.item.name_en,
-      pi.quantityPerBag,
-      pi.totalNeeded,
-      pi.bulksToBuy,
-      pi.looseUnits,
+      String(pi.quantityPerBag),
+      String(pi.totalNeeded),
+      String(pi.bulksToBuy),
+      String(pi.looseUnits),
       pi.estimatedCost.toFixed(2),
     ])
 
@@ -177,13 +177,14 @@ export function ProcurementPage() {
       grandTotal.toFixed(2),
     ])
 
-    // Build CSV string
+    // Quote all cells (headers + data) for consistency
+    const escapeCell = (cell: string) => `"${cell.replace(/"/g, '""')}"`
     const csvContent = [
-      headers.join(','),
-      ...rows.map(row => row.map(cell => `"${cell}"`).join(','))
-    ].join('\n')
+      headers.map(escapeCell).join(','),
+      ...rows.map(row => row.map(escapeCell).join(','))
+    ].join('\r\n')
 
-    // Add BOM for Arabic/UTF-8 support
+    // Add BOM for Arabic/UTF-8 support in Excel
     const bom = '\uFEFF'
     const blob = new Blob([bom + csvContent], { type: 'text/csv;charset=utf-8;' })
     const url = URL.createObjectURL(blob)
@@ -191,9 +192,15 @@ export function ProcurementPage() {
     const link = document.createElement('a')
     link.href = url
     link.download = `procurement_${new Date().toISOString().split('T')[0]}.csv`
+    link.style.display = 'none'
+    document.body.appendChild(link)
     link.click()
     
-    URL.revokeObjectURL(url)
+    // Cleanup after a short delay
+    setTimeout(() => {
+      document.body.removeChild(link)
+      URL.revokeObjectURL(url)
+    }, 100)
   }
 
   return (
